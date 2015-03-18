@@ -1,11 +1,7 @@
+<!DOCTYPE html>
+
 <HTML>
-<HEAD>
 
-
-<TITLE>Your Login Result</TITLE>
-</HEAD>
-
-<BODY>
 <!--A simple example to demonstrate how to use JSP to 
     connect and query a database. 
     @author  Hong-Yu Zhang, University of Alberta
@@ -14,16 +10,15 @@
  -->
 <%@ page import="java.sql.*" %>
 <% 
+	boolean goodLogin = false;	
 
         if(request.getParameter("Submit") != null)
         {
+		
 
 	        //get the user input from the login page
         	String userName = (request.getParameter("USERID")).trim();
 	        String passwd = (request.getParameter("PASSWD")).trim();
-        	out.println("<p>Your input User Name is "+userName+"</p>");
-        	out.println("<p>Your input password is "+passwd+"</p>");
-
 
 	        //establish the connection to the underlying database
         	Connection conn = null;
@@ -43,7 +38,7 @@
 	
         	try{
 	        	//establish the connection 
-		        conn = DriverManager.getConnection(dbstring,"USERNAME","PASSWORD"); /* Oracle login info here */
+		        conn = DriverManager.getConnection(dbstring,"risticpe","compsci1"); /* Oracle login info here */
         		conn.setAutoCommit(false);
 	        }
         	catch(Exception ex){
@@ -56,7 +51,7 @@
         	Statement stmt = null;
 	        ResultSet rset = null;
         	String sql = "select password from users where user_name =" + "'" + userName + "'";
-	        out.println(sql);
+
         	try{
 	        	stmt = conn.createStatement();
 		        rset = stmt.executeQuery(sql);
@@ -75,14 +70,11 @@
 
 	        if(truepwd.length() > 0 && passwd.equals(truepwd))
 			{
-		        	out.println("<p><b>Your Login is Successful!</b></p>");
-			}
-        	else
-			{
-	        		out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
+		        	goodLogin = true;
 			}
 
-                try{
+                try
+		{
                         conn.close();
                 }
                 catch(Exception ex)
@@ -96,8 +88,46 @@
 	}
 %>
 
+<HEAD>
+    <TITLE>Login</TITLE>
+</HEAD>
 
+<BODY>
+
+<!--This is the login page-->
+
+<H1>Radiology Information System</H1>
+
+<FORM NAME="LoginForm" ACTION="login.jsp" METHOD="post" >
+
+    <% if(!goodLogin) { %>
+    <P>Bad username and/or password. Please try again.</P>
+
+    <% } else {%>
+    <P>Success! This should have gone to the search page but it doesn't exist quite yet.</P>
+
+    <% } %>
+
+    
+
+    <TABLE>
+	<TR VALIGN=TOP ALIGN=LEFT>
+	    <TD><B><I>Userid:</I></B></TD>
+	    <TD><INPUT TYPE="text" NAME="USERID" VALUE="userid"><BR></TD>
+	</TR>
+
+	<TR VALIGN=TOP ALIGN=LEFT>
+	    <TD><B><I>Password:</I></B></TD>
+	    <TD><INPUT TYPE="password" NAME="PASSWD" VALUE="password"></TD>
+	</TR>
+    </TABLE>
+
+    <INPUT TYPE="submit" NAME="Submit" VALUE="LOGIN">
+</FORM>
 
 </BODY>
+
 </HTML>
+
+
 
