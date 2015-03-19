@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>Sample Login</TITLE>
+</HEAD>
+
+<BODY>
+<!--This is the login page-->
+<H1><CENTER>Sample Login</CENTER></H1>
+
+<FORM NAME="LoginForm" ACTION="login.jsp" METHOD="post" >
+
+<P>To login successfully, you need to submit a valid userid and password</P>
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Userid:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="USERID" VALUE="userid"><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Password:</I></B></TD>
+<TD><INPUT TYPE="password" NAME="PASSWD" VALUE="password"></TD>
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" NAME="Submit" VALUE="LOGIN">
+</FORM>
+
+<hr>
+
+<h2>What this example do? </h2>
+This example checks whether the user entered id and password pair is valid. The valid id and password pairs are stored in a table called login.
+If the id and password match the tuple in the underlying table, a success message will be displayed.
+If the id and password doesn't match any tuple in the underlying table, a failure message will be displayed.
+
+<h2> Three Files in this example </h2>
+There are 3 files in this example. 
+<li> <a href="http://www.cs.ualberta.ca/~yuan/servlets/login.html">login.html</a>
+is the user login page.
+<li> <a href="http://www.cs.ualberta.ca/~yuan/servlets/login.jsp">login.jsp</a>
+is the jsp file checking whether the user input is valid.
+<li> <a href="http://luscar.cs.ualberta.ca:8080/yuan/login/login.sql">login.sql</a>
+is the sql file which create the table,login, and insert id/password pairs into that table.
+<p>
+<p>drop table login;
+<p>create table login(id char(20),pwd char(20));
+
+<p>insert into login values(john, 11111);
+<p>insert into login values(mary, 22222);
+
+<h2>Install this example</h2>
+
+To execute this example successfully, you need to do the following:
+<li>execute login.sql to create the id/password table (login table)
+<li>copy login.jsp and login.html into your <i>your_home_directory</i>/catalina/webapps/proj1/ 
+<li>change the two string "your-sql-id" and "your-sql-password" to be your sql account name and sql password. 
+<li>then start your tomcat
+<li>Go to http://<i>machine_name</i>:<i>your_port_number</i>/proj1/login.html 
+<hr>
+</p>
+<p>
+<HR>
+</BODY>
+</HTML>
