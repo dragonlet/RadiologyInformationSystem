@@ -8,83 +8,29 @@
 
     Modified by Daniel Ristic-Petrovic
  -->
-<%@ page import="java.sql.*" %>
+<%@ page import="com.LoginLayer" %>
 <% 
-	boolean goodLogin = false;	
+	boolean goodLogin = false;
+	LoginLayer login = new LoginLayer();		
 
         if(request.getParameter("Submit") != null)
         {
 		
 
-	        //get the user input from the login page
+	        /* Retrieve the user input from the login page. */
+
         	String userName = (request.getParameter("USERID")).trim();
 	        String passwd = (request.getParameter("PASSWD")).trim();
 
-	        //establish the connection to the underlying database
-        	Connection conn = null;
-	
-	        String driverName = "oracle.jdbc.driver.OracleDriver";
-            	String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-	
-	        try{
-		        //load and register the driver
-        		Class drvClass = Class.forName(driverName); 
-	        	DriverManager.registerDriver((Driver) drvClass.newInstance());
-        	}
-	        catch(Exception ex){
-		        out.println("<hr>" + ex.getMessage() + "<hr>");
-	
-	        }
-	
-        	try{
-	        	//establish the connection 
-		        conn = DriverManager.getConnection(dbstring,"risticpe","compsci1"); /* Oracle login info here */
-        		conn.setAutoCommit(false);
-	        }
-        	catch(Exception ex){
-	        
-		        out.println("<hr>" + ex.getMessage() + "<hr>");
-        	}
-	
-
-	        //select the user table from the underlying db and validate the user name and password
-        	Statement stmt = null;
-	        ResultSet rset = null;
-        	String sql = "select password from users where user_name =" + "'" + userName + "'";
-
-        	try{
-	        	stmt = conn.createStatement();
-		        rset = stmt.executeQuery(sql);
-        	}
-	
-	        catch(Exception ex){
-		        out.println("<hr>" + ex.getMessage() + "<hr>");
-        	}
-
-	        String truepwd = "";
-	
-        	while(rset != null && rset.next())
-	        	truepwd = (rset.getString(1)).trim();
-	
-		//Redirect based on user privileges
-
-	        if(truepwd.length() > 0 && passwd.equals(truepwd))
+		if((goodLogin = login.validateLogin(userName, passwd)) == false)
 			{
-		        	goodLogin = true;
-			}
-
-                try
-		{
-                        conn.close();
-                }
-                catch(Exception ex)
-		{
-                        out.println("<hr>" + ex.getMessage() + "<hr>");
-                }
+				if(login.failedWithError())
+					out.println(login.error_printout);
+			}		
         }
 	else
 	{
-		response.sendRedirect("login.html");
+		response.sendRedirect("login.jsp");
 	}
 %>
 
@@ -128,6 +74,3 @@
 </BODY>
 
 </HTML>
-
-
-
