@@ -1,27 +1,24 @@
+<!DOCTYPE html>
+
 <HTML>
-<HEAD>
 
-
-<TITLE>Your Login Result</TITLE>
-</HEAD>
-
-<BODY>
 <!--A simple example to demonstrate how to use JSP to 
     connect and query a database. 
     @author  Hong-Yu Zhang, University of Alberta
+
+    Modified by Daniel Ristic-Petrovic
  -->
 <%@ page import="java.sql.*" %>
 <% 
+	boolean goodLogin = false;	
 
-        if(request.getParameter("bSubmit") != null)
+        if(request.getParameter("Submit") != null)
         {
+		
 
 	        //get the user input from the login page
         	String userName = (request.getParameter("USERID")).trim();
 	        String passwd = (request.getParameter("PASSWD")).trim();
-        	out.println("<p>Your input User Name is "+userName+"</p>");
-        	out.println("<p>Your input password is "+passwd+"</p>");
-
 
 	        //establish the connection to the underlying database
         	Connection conn = null;
@@ -41,7 +38,7 @@
 	
         	try{
 	        	//establish the connection 
-		        conn = DriverManager.getConnection(dbstring,"your_user_id","your_pass_word");
+		        conn = DriverManager.getConnection(dbstring,"risticpe","compsci1"); /* Oracle login info here */
         		conn.setAutoCommit(false);
 	        }
         	catch(Exception ex){
@@ -53,8 +50,8 @@
 	        //select the user table from the underlying db and validate the user name and password
         	Statement stmt = null;
 	        ResultSet rset = null;
-        	String sql = "select PWD from login where id = '"+userName+"'";
-	        out.println(sql);
+        	String sql = "select password from users where user_name =" + "'" + userName + "'";
+
         	try{
 	        	stmt = conn.createStatement();
 		        rset = stmt.executeQuery(sql);
@@ -69,31 +66,68 @@
         	while(rset != null && rset.next())
 	        	truepwd = (rset.getString(1)).trim();
 	
-        	//display the result
-	        if(passwd.equals(truepwd))
-		        out.println("<p><b>Your Login is Successful!</b></p>");
-        	else
-	        	out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
+		//Redirect based on user privileges
 
-                try{
+	        if(truepwd.length() > 0 && passwd.equals(truepwd))
+			{
+		        	goodLogin = true;
+			}
+
+                try
+		{
                         conn.close();
                 }
-                catch(Exception ex){
+                catch(Exception ex)
+		{
                         out.println("<hr>" + ex.getMessage() + "<hr>");
                 }
         }
-        else
-        {
-                out.println("<form method=post action=login.jsp>");
-                out.println("UserName: <input type=text name=USERID maxlength=20><br>");
-                out.println("Password: <input type=password name=PASSWD maxlength=20><br>");
-                out.println("<input type=submit name=bSubmit value=Submit>");
-                out.println("</form>");
-        }      
+	else
+	{
+		response.sendRedirect("login.html");
+	}
 %>
 
+<HEAD>
+    <TITLE>Login</TITLE>
+</HEAD>
 
+<BODY>
+
+<!--This is the login page-->
+
+<H1>Radiology Information System</H1>
+
+<FORM NAME="LoginForm" ACTION="login.jsp" METHOD="post" >
+
+    <% if(!goodLogin) { %>
+    <P>Bad username and/or password. Please try again.</P>
+
+    <% } else {%>
+    <P>Success! This should have gone to the search page but it doesn't exist quite yet.</P>
+
+    <% } %>
+
+    
+
+    <TABLE>
+	<TR VALIGN=TOP ALIGN=LEFT>
+	    <TD><B><I>Userid:</I></B></TD>
+	    <TD><INPUT TYPE="text" NAME="USERID" VALUE="userid"><BR></TD>
+	</TR>
+
+	<TR VALIGN=TOP ALIGN=LEFT>
+	    <TD><B><I>Password:</I></B></TD>
+	    <TD><INPUT TYPE="password" NAME="PASSWD" VALUE="password"></TD>
+	</TR>
+    </TABLE>
+
+    <INPUT TYPE="submit" NAME="Submit" VALUE="LOGIN">
+</FORM>
 
 </BODY>
+
 </HTML>
+
+
 

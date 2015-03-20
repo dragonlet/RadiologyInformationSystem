@@ -7,18 +7,14 @@
 <body>
 <%@page import="com.RISBusinessLayer" %>
 <%
-  //Business layer is class to handle all interaction between webserver and oracle
-  RISBusinessLayer _bl = new RISBusinessLayer();
-  String user_name = (String) session.getAttribute("user_name");
-  if ( _bl.validUser(user_name) ){
-  //if( session.isNew() ){
+  if( session.isNew() ){
 %>
-	<jsp:forward page="refresh.jsp" />
+	<jsp:forward page="login.html" />
 <%
   }
   else {
 %>
-	<jsp:forward page="login.html" />
+	<jsp:forward page="search.jsp" />
 <%
   }
 %>
