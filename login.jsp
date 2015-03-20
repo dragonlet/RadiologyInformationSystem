@@ -2,12 +2,9 @@
 
 <HTML>
 
-<!--A simple example to demonstrate how to use JSP to 
-    connect and query a database. 
-    @author  Hong-Yu Zhang, University of Alberta
+<!-- Login module jsp page. -->
 
-    Modified by Daniel Ristic-Petrovic
- -->
+
 <%@ page import="com.LoginLayer" %>
 <% 
 	boolean goodLogin = false;
@@ -27,6 +24,13 @@
 				if(login.failedWithError())
 					out.println(login.error_printout);
 			}		
+		else
+			{
+				/* username must be cast to String, privileges to Char. 
+				   i.e. String username = (String) session.getAttribute("username"); */
+				session.setAttribute("username", userName);
+				session.setAttribute("privileges", login.getPrivs());
+			}	
         }
 	else
 	{
@@ -74,3 +78,6 @@
 </BODY>
 
 </HTML>
+
+
+
