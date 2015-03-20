@@ -51,7 +51,7 @@ public class LoginLayer {
 	
 	try{
 	    //establish the connection 
-	    conn = DriverManager.getConnection(dbstring,"risticpe","compsci1"); /* Oracle login info here */
+	    conn = DriverManager.getConnection(dbstring,"USERNAME","PASSWORD"); /* Oracle login info here */
 	    conn.setAutoCommit(false);
 	}
 	catch(Exception ex){
@@ -84,9 +84,8 @@ public class LoginLayer {
 	    {
 		while(rset != null && rset.next())
 		    {
-			truepwd = (rset.getString(1)).trim();
-			rset.next();
-			user_class = (rset.getString(1)).trim();
+			truepwd = (rset.getString("password")).trim();
+			user_class = (rset.getString("class")).trim();
 		    }
 	    }
 	catch(Exception ex)
