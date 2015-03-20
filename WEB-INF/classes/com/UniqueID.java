@@ -7,7 +7,7 @@ import java.util.Random;
 /* 
    To generate a unique 5-digit ID number (integer type) for
    any of the tables, for example when inserting a row,
-   instantiate this class and call generate(<type>)
+   instantiate this class and call generate(<type>) on it,
    where type is a String (one of "person", "image", or "record").
    The returned value is the integer.
    
