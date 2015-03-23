@@ -33,7 +33,7 @@ public class BaseLayer {
 		}
 		catch(Exception ex)
 		{
-			throw new BaseLayerException("Error in querying DB:" + ex.getMessage(), ex);
+			throw new BaseLayerException("Error in querying DB: " + ex.getMessage(), ex);
 		}
     }
 }

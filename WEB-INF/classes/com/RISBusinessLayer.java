@@ -11,23 +11,24 @@ public class RISBusinessLayer {
 		_bl = new BaseLayer();
 	}
 	
-	public boolean validUser(String user_name, int id) throws BaseLayerException{
-		if(user_name == null || user_name.isEmpty())
+	public boolean validUser(String user_name, Integer person_id) throws BaseLayerException{
+		if(user_name == null || user_name.isEmpty() || person_id == null)
 			return false;
 		
 		try
 		{
-			ResultSet rset = _bl.GetQueryResult( genValidUserSql(user_name) );
+			ResultSet rset = _bl.GetQueryResult( genValidUserSql(user_name, person_id) );
 			return (rset != null)? true : false;
 		}
 		catch(Exception ex)
 		{
-			throw new BaseLayerException(ex);
+			throw ex;
 		}
 	}
 	
-	private String genValidUserSql(String user_name)
+	private String genValidUserSql(String user_name, Integer person_id)
 	{
-		return "select * from users where user_name =" + "'" + user_name + "'";
+		return "select * from users where user_name =" + "'" + user_name + "'"
+			+ "AND person_id =" + "'" + person_id + "'";
 	}
 }
