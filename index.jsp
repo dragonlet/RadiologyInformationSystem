@@ -7,16 +7,17 @@
 <body>
 <%@page import="com.RISBusinessLayer" %>
 <%
-  if( session.isNew() ){
-%>
-	<jsp:forward page="login.html" />
-<%
-  }
-  else {
+	RISBusinessLayer _bl = new RISBusinessLayer;
+	if( _bl.validUser( (String) session.getAttribute("user_name") ){
 %>
 	<jsp:forward page="search.jsp" />
 <%
-  }
+	}
+	else {
+%>
+	<jsp:forward page="login.html" />
+<%
+	}
 %>
 </body>
 </html>
