@@ -13,21 +13,20 @@
 	boolean goodLogin = false;
 	LoginLayer login = new LoginLayer();		
 
-        if(request.getParameter("Submit") != null)
-        {
-		
+    if(request.getParameter("Submit") != null)
+    {
+	    /* Retrieve the user input from the login page. */
 
-	        /* Retrieve the user input from the login page. */
-
-        	String userName = (request.getParameter("USERID")).trim();
-	        String passwd = (request.getParameter("PASSWD")).trim();
+      	String userName = (request.getParameter("USERID")).trim();
+	    String passwd = (request.getParameter("PASSWD")).trim();
 
 		if((goodLogin = login.validateLogin(userName, passwd)) == false)
-			{
-				if(login.failedWithError())
-					out.println(login.error_printout);
-			}		
-        }
+		{
+			if(login.failedWithError())
+				out.println(login.error_printout);
+		}		
+    }
+	
 	else
 	{
 		response.sendRedirect("login.jsp");
