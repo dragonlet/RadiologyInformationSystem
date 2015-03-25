@@ -10,8 +10,8 @@ public class BaseLayer{
 
     private final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
     private final String DB_CONN_STRING = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-    private final String ORA_USERNAME = "risticpe";
-    private final String ORA_PASSWORD = "compsci1";
+    private final String ORA_USERNAME = "";
+    private final String ORA_PASSWORD = "";
     private Connection conn;
 	
     public BaseLayer(){}
