@@ -8,6 +8,8 @@
 <%@ page import="com.LoginLayer" %>
 <% 
 	boolean goodLogin = false;
+	boolean attempted = false;
+
 	LoginLayer login = new LoginLayer();		
 
         if(request.getParameter("Submit") != null)
@@ -21,6 +23,7 @@
 
 		if((goodLogin = login.validateLogin(userName, passwd)) == false)
 			{
+				attempted = true;
 				if(login.failedWithError())
 					out.println(login.error_printout);
 			}		
@@ -30,6 +33,7 @@
 				   i.e. String username = (String) session.getAttribute("username"); */
 				session.setAttribute("username", userName);
 				session.setAttribute("privileges", login.getPrivs());
+				attempted = true;
 			}	
         }
 %>
@@ -46,12 +50,14 @@
 
 <FORM NAME="LoginForm" ACTION="login.jsp" METHOD="post" >
 
-    <% if(!goodLogin) { %>
+    <% if(!goodLogin && attempted) { %>
     <P>Bad username and/or password. Please try again.</P>
 
-    <% } else {%>
+    <% } else if(goodLogin && attempted){%>
     <P>Success! This should have gone to the search page but it doesn't exist quite yet.</P>
 
+    <% } else { %>
+    <P>Please Log In.</p>
     <% } %>
 
     
@@ -74,6 +80,5 @@
 </BODY>
 
 </HTML>
-
 
 
