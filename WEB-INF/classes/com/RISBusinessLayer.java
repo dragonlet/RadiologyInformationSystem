@@ -22,7 +22,7 @@ public class RISBusinessLayer {
 		}
 		catch(Exception ex)
 		{
-			throw ex;
+			throw new BaseLayerException("Error in querying DB: " + ex.getMessage(), ex);
 		}
 	}
 	

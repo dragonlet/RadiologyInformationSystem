@@ -32,10 +32,6 @@
 				session.setAttribute("privileges", login.getPrivs());
 			}	
         }
-	else
-	{
-		response.sendRedirect("login.jsp");
-	}
 %>
 
 <HEAD>
