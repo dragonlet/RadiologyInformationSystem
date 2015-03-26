@@ -3,28 +3,24 @@ import java.lang.*;
 import java.io.*;
 import java.sql.*;
 
-public class RISBusinessLayer {
-	BaseLayer _bl;
+public class RISBusinessLayer extends BaseLayer{
 	
-	public RISBusinessLayer()
+	public RISBusinessLayer(){}
+	
+	public boolean validUser(String user_name, Integer person_id)
 	{
-		_bl = new BaseLayer();
-	}
-	
-	public boolean validUser(String user_name, Integer person_id) throws BaseLayerException{
 		if(user_name == null || user_name.isEmpty() || person_id == null)
 			return false;
-		
-		try
-		{
-			ResultSet rset = _bl.GetQueryResult( genValidUserSql(user_name, person_id) );
-			return (rset != null)? true : false;
-		}
-		catch(Exception ex)
-		{
-			throw new BaseLayerException("Error in querying DB: " + ex.getMessage(), ex);
-		}
+	
+		ResultSet rset = null;
+		Boolean valid = false;
+	
+		openConnection();
+		rset = GetQueryResult(genValidUserSql(username));
+		valid = (rset != null) ? true : false;
+		closeConnection();
 	}
+	
 	
 	private String genValidUserSql(String user_name, Integer person_id)
 	{
