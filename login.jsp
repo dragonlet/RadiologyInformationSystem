@@ -1,41 +1,30 @@
 <!DOCTYPE html>
+<%@include file="includes.jsp" %>
+<%@ page import="com.LoginLayer" %>
 
 <HTML>
-
 <!-- Login module jsp page. -->
-
-
-<%@ page import="com.LoginLayer" %>
 <% 
 	boolean goodLogin = false;
 	boolean attempted = false;
 
 	LoginLayer login = new LoginLayer();		
 
-        if(request.getParameter("Submit") != null)
-        {
-		
+	if(request.getParameter("Submit") != null)
+	{
+		/* Retrieve the user input from the login page. */
+		String userName = (request.getParameter("USERID")).trim();
+		String passwd = (request.getParameter("PASSWD")).trim();
 
-	        /* Retrieve the user input from the login page. */
-
-        	String userName = (request.getParameter("USERID")).trim();
-	        String passwd = (request.getParameter("PASSWD")).trim();
-
-		if((goodLogin = login.validateLogin(userName, passwd)) == false)
-			{
-				attempted = true;
-				if(login.failedWithError())
-					out.println(login.error_printout);
-			}		
-		else
-			{
-				/* username must be cast to String, privileges to Char. 
-				   i.e. String username = (String) session.getAttribute("username"); */
-				session.setAttribute("username", userName);
-				session.setAttribute("privileges", login.getPrivs());
-				attempted = true;
-			}	
-        }
+		if((goodLogin = login.validateLogin(userName, passwd)))
+		{
+			/* username must be cast to String, privileges to Char. 
+			i.e. String username = (String) session.getAttribute("username"); */
+			session.setAttribute("username", userName);
+			session.setAttribute("privileges", login.getPrivs());
+		}
+		attempted = true;		
+	}
 %>
 
 <HEAD>
@@ -54,7 +43,7 @@
     <P>Bad username and/or password. Please try again.</P>
 
     <% } else if(goodLogin && attempted){%>
-    <P>Success! This should have gone to the search page but it doesn't exist quite yet.</P>
+    <c:redirect url="search.jsp">
 
     <% } else { %>
     <P>Please Log In.</p>

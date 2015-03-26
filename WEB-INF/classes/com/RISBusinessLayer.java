@@ -7,7 +7,8 @@ public class RISBusinessLayer extends BaseLayer{
 	
 	public RISBusinessLayer(){}
 	
-	public boolean validUser(String user_name, Integer person_id) throws BaseLayerException
+	public boolean validUser(String user_name, Integer person_id)
+	throws BaseLayerException
 	{
 		if(user_name == null || user_name.isEmpty() || person_id == null)
 			return false;

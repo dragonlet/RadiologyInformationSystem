@@ -7,8 +7,6 @@ public class LoginLayer extends BaseLayer{
     private char user_privilege_level;
     private boolean logged_in;
     private boolean failure;
-    public String error_printout;
-	
 
     public LoginLayer()
     {		
@@ -33,67 +31,49 @@ public class LoginLayer extends BaseLayer{
     }
 
     public boolean validateLogin(String username, String password)
+	throws BaseLayerException, SQLException
     {
-	ResultSet rset = null;
-	String truepwd = null;
-	String user_class = null;
+		ResultSet rset = null;
+		String truepwd = null;
+		String user_class = null;
 	
-	try
-	    {
 		openConnection();
 		rset = GetQueryResult(genValidateUserSql(username));
-	    }
-	catch(Exception ex)
-	    {
-		error_printout = "<hr>" + ex.getMessage() + "<hr>";
-		failure = true;
-		return false;
-	    }
 		
-	try
+		try
 	    {
-		while(rset != null && rset.next())
+			while(rset != null && rset.next())
 		    {
-			truepwd = (rset.getString("password")).trim();
-			user_class = (rset.getString("class")).trim();
+				truepwd = (rset.getString("password")).trim();
+				user_class = (rset.getString("class")).trim();
 		    }
 	    }
-	catch(Exception ex)
+		catch(Exception ex)
 	    {
-		error_printout = "<hr>" + ex.getMessage() + "<hr>";
-		failure = true;
-		return false;
+			//Should we make a Login Layer Exception for this??
+			throw ex;
 	    }
 
-	if(truepwd == null)
+		if(truepwd == null)
 	    {
-		/* No matching rows were found => Password is incorrect. */
-		return false;
+			/* No matching rows were found => Password is incorrect. */
+			return false;
 	    }
 			
-	/* If valid, log the user in with the appropriate priviliges. */
-	if(truepwd.length() > 0 && password.equals(truepwd))
+		/* If valid, log the user in with the appropriate priviliges. */
+		if(truepwd.length() > 0 && password.equals(truepwd))
 	    {
-		logged_in = true;
-		user_privilege_level = user_class.charAt(0);
+			logged_in = true;
+			user_privilege_level = user_class.charAt(0);
 	    }
 
-	try
-	    {
 		closeConnection();
-	    }
-	catch(Exception ex)
-	    {
-		error_printout = "<hr>" + ex.getMessage() + "<hr>";
-		failure = true;
-		return false;
-	    }
 
-	return logged_in;
+		return logged_in;
     }
 	
     private String genValidateUserSql(String username)
     {
-	return "select password, class from users where user_name =" + "'" + username + "'";
+		return "select password, class from users where user_name =" + "'" + username + "'";
     }
 }

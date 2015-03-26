@@ -30,7 +30,7 @@ public class BaseLayer{
 	    }
 	catch(Exception ex)
 	    {
-		throw new BaseLayerException("Error in querying DB: " + ex.getMessage(), ex);
+		throw new BaseLayerException("Error in connecting to DB: " + ex.getMessage(), ex);
 	    }
     }
 
@@ -46,7 +46,8 @@ public class BaseLayer{
 	    }
     }
 	
-    public ResultSet GetQueryResult(String sql) throws BaseLayerException
+    public ResultSet GetQueryResult(String sql)
+	throws BaseLayerException
     {
 	try
 	    {
@@ -58,7 +59,7 @@ public class BaseLayer{
 	    }
 	catch(Exception ex)
 	    {
-		throw new BaseLayerException("Error in querying DB: " + ex.getMessage(), ex);
+		throw new BaseLayerException("Error in closing connection to DB: " + ex.getMessage(), ex);
 	    }
     }
 }
