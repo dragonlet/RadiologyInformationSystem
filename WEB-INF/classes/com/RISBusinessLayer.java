@@ -7,7 +7,7 @@ public class RISBusinessLayer extends BaseLayer{
 	
 	public RISBusinessLayer(){}
 	
-	public boolean validUser(String user_name, Integer person_id)
+	public boolean validUser(String user_name, Integer person_id) throws BaseLayerException
 	{
 		if(user_name == null || user_name.isEmpty() || person_id == null)
 			return false;
@@ -16,9 +16,11 @@ public class RISBusinessLayer extends BaseLayer{
 		Boolean valid = false;
 	
 		openConnection();
-		rset = GetQueryResult(genValidUserSql(username));
+		rset = GetQueryResult(genValidUserSql(user_name, person_id));
 		valid = (rset != null) ? true : false;
 		closeConnection();
+		
+		return valid;
 	}
 	
 	
