@@ -71,8 +71,6 @@
 
 
 		String new_user = "INSERT INTO users VALUES('"+UserName+"', '"+Password+"', '"+Class+"', "+p_id+", TO_DATE('19801202','YYYYMMDD'))";
-		//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
-		// INSERT INTO users VALUES('jack1', 'redrum', 'a', 15, TO_DATE('19801202','YYYYMMDD'));
 
 		module.executequery(new_user);
 
