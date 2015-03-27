@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<%@include file="includes.jsp" %>
+<%@ include file="includes.jsp" %>
 <%@ page import="com.LoginLayer" %>
 
 <HTML>
 <!-- Login module jsp page. -->
 <% 
-	HttpSession session = request.getSession();
+	session = request.getSession();
 	boolean goodLogin = false;
 	boolean attempted = false;
 
@@ -44,7 +44,7 @@
     <P>Bad username and/or password. Please try again.</P>
 
     <% } else if(goodLogin && attempted){%>
-    <c:redirect url="search.jsp">
+    <c:redirect url="search.jsp" />
 
     <% } else { %>
     <P>Please Log In.</p>

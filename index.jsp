@@ -7,7 +7,7 @@
 <body>
 <%@page import="com.RISBusinessLayer" %>
 <%
-	HttpSession session = request.getSession(false);
+	session = request.getSession(false);
 	RISBusinessLayer _bl = new RISBusinessLayer();
 	if( session != null
 		&& _bl.validUser((String) session.getAttribute("user_name"),

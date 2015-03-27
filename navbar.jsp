@@ -2,20 +2,27 @@
 <%@include file="includes.jsp" %>
 
 <%
-	HttpSession session = request.getSession(false);
+	session = request.getSession(false);
 	if(session == null)
 	{
 %>
-	<c:redirect url="login.jsp">
+	<c:redirect url="login.jsp" />
 <%
 	}
 	
-	Char privileges = (Char) session.getAttribute("privileges");
+	String privileges = (String) session.getAttribute("privileges");
+	if(privileges == null || privileges.isEmpty() )
+	{
+%>
+	<c:redirect url="login.jsp" />
+<%
+	}
+	char priv = privileges.charAt(0);
 %>
 
 <nav>
 	<a href="search.jsp">Search</a>
-	<%switch(privileges)
+	<%switch(priv)
 	{
 		case 'a':
 	%>
@@ -37,6 +44,10 @@
 	<a href="Upload.jsp">Upload</a>
 	<%
 		break;
+		default:
+	%>
+		c:redirect url="login.jsp" />
+	<%
 	}
 	%>
 	<a href="logout.jsp">Logout</a>
