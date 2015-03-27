@@ -25,7 +25,7 @@
 
     </TABLE>
 
-<INPUT TYPE="submit" NAME="Add" VALUE="Delete">
+<INPUT TYPE="submit" NAME="Delete" VALUE="Delete">
 
 </FORM>
 
@@ -44,7 +44,7 @@
 	ManagementModule module = new ManagementModule();
 
 
-	if(request.getParameter("Add") != null)
+	if(request.getParameter("Delete") != null)
         {
 
 		if (request.getParameter("FIRSTNAME") == "")
