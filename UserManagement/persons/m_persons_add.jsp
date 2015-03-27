@@ -18,11 +18,6 @@
 
  <TABLE>
 	<TR VALIGN=TOP ALIGN=LEFT>
-	    <TD><B><I>person id:</I></B></TD>
-	    <TD><INPUT TYPE="text" NAME="PERSONID" VALUE=""><BR></TD>
-	</TR>
-
-	<TR VALIGN=TOP ALIGN=LEFT>
 	    <TD><B><I>First Name:</I></B></TD>
 	    <TD><INPUT TYPE="text" NAME="FIRSTNAME" VALUE=""></TD>
 	</TR>
@@ -61,9 +56,11 @@
 
 
 <%@ page import="com.ManagementModule" %>
+<%@ page import="com.UniqueID" %>
 <% 
 
 	ManagementModule module = new ManagementModule();
+	UniqueID idGen = new UniqueID();
 
 
 	if(request.getParameter("Add") != null)
@@ -76,24 +73,32 @@
 
 	        /* Retrieve the new persons data. */
 
-        	String p_id = (request.getParameter("PERSONID")).trim();
-	        String FirstName = (request.getParameter("FIRSTNAME")).trim();
-	        String LastName = (request.getParameter("LASTNAME")).trim();
-	        String Address = (request.getParameter("ADDRESS")).trim();
-	        String Email = (request.getParameter("EMAIL")).trim();
-	        String Phone = (request.getParameter("PHONE")).trim();
+        	int    p_id = idGen.generate("person");
 
-		String new_person = "INSERT INTO persons VALUES("+p_id+", '"+FirstName+"', '"+LastName+"', '"+Address+"', '"+Email+"', "+Phone+")";
-		//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
+		if (p_id != 0){
+
+	        	String FirstName = (request.getParameter("FIRSTNAME")).trim();
+	        	String LastName = (request.getParameter("LASTNAME")).trim();
+	        	String Address = (request.getParameter("ADDRESS")).trim();
+	        	String Email = (request.getParameter("EMAIL")).trim();
+	        	String Phone = (request.getParameter("PHONE")).trim();
+
+			String new_person = "INSERT INTO persons VALUES("+p_id+", '"+FirstName+"', '"+LastName+"', '"+Address+"', '"+Email+"', "+Phone+")";
+			//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
 		
 
-		module.executequery(new_person);
+			module.executequery(new_person);
 
-		if (module.FailedWithError()){
-			%><P>Failed to Add person.</P><%}
+			if (module.FailedWithError()){
+				%><P>Failed to Add person.</P><%}
 
-		else{
-			%><P>Successfully Added.</P><%}
+			else{
+				%><P>Successfully Added.</P><%}
+
+		}
+
+		else
+			%><P>Failed generating unique ID.</P><%
 		
         }
 	
