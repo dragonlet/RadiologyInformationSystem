@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-
+<%@ include file="includes.jsp" %>
 <HTML>
-
+<%@ include file="navbar.jsp" %>
 <HEAD>
     <TITLE>User Management</TITLE>
 </HEAD>
