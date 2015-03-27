@@ -7,8 +7,11 @@
 <body>
 <%@page import="com.RISBusinessLayer" %>
 <%
+	HttpSession session = request.getSession(false);
 	RISBusinessLayer _bl = new RISBusinessLayer();
-	if( _bl.validUser((String) session.getAttribute("user_name"), (Integer) session.getAttribute("person_id")) )
+	if( session != null
+		&& _bl.validUser((String) session.getAttribute("user_name"),
+			(Integer) session.getAttribute("person_id")) )
 	{
 %>
 	<jsp:forward page="search.jsp" />

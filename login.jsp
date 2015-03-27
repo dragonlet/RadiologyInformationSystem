@@ -5,6 +5,7 @@
 <HTML>
 <!-- Login module jsp page. -->
 <% 
+	HttpSession session = request.getSession();
 	boolean goodLogin = false;
 	boolean attempted = false;
 
@@ -19,8 +20,8 @@
 		if((goodLogin = login.validateLogin(userName, passwd)))
 		{
 			/* username must be cast to String, privileges to Char. 
-			i.e. String username = (String) session.getAttribute("username"); */
-			session.setAttribute("username", userName);
+			i.e. String username = (String) session.getAttribute("user_name"); */
+			session.setAttribute("user_name", userName);
 			session.setAttribute("privileges", login.getPrivs());
 		}
 		attempted = true;		
