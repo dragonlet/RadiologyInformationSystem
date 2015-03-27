@@ -91,7 +91,7 @@
 		if (select != null && select.length != 0 && !p_id.equals("")) {
 			for (int i = 0; i < select.length; i++) { // iterate through the checked boxes
 				
-				if(select[i].equals("first")){
+				if(select[i].equals("first") && !(request.getParameter("FIRSTNAME")).trim().equals("")){
 						%><%
 						String FirstName = (request.getParameter("FIRSTNAME")).trim();
 						temp = "UPDATE persons SET first_name = '" + FirstName + "' WHERE person_id = " + p_id;
@@ -102,7 +102,7 @@
 							%><P>First name changed successfully</P><%
 						}	
 
-				if(select[i].equals("last")){
+				if(select[i].equals("last") && !(request.getParameter("LASTNAME")).trim().equals("")){
 	     				    	String LastName = (request.getParameter("LASTNAME")).trim();
 						temp = "UPDATE persons SET last_name = '" + LastName + "' WHERE person_id = " + p_id;
 						module.executequery(temp);
@@ -112,7 +112,7 @@
 							%><P>Last name changed successfully</P><%
 						}	
 
-				if(select[i].equals("address")){
+				if(select[i].equals("address") && !(request.getParameter("ADDRESS")).trim().equals("")){
 	         				String Address = (request.getParameter("ADDRESS")).trim();
 						temp = "UPDATE persons SET address = '" + Address + "' WHERE person_id = " + p_id;
 						module.executequery(temp);
@@ -122,7 +122,7 @@
 							%><P>Address changed successfully</P><%
 						}	
 
-				if(select[i].equals("email")){
+				if(select[i].equals("email") && !(request.getParameter("EMAIL")).trim().equals("")){
 					        String Email = (request.getParameter("EMAIL")).trim();
 						temp = "UPDATE persons SET email = '" + Email + "' WHERE person_id = " + p_id;
 						module.executequery(temp);
@@ -132,7 +132,7 @@
 							%><P>Email changed successfully</P><%
 						}	
 
-				if(select[i].equals("phone")){
+				if(select[i].equals("phone") && !(request.getParameter("PHONE")).trim().equals("")){
 					        String Phone = (request.getParameter("PHONE")).trim();
 						temp = "UPDATE persons SET phone = '" + Phone + "' WHERE person_id = " + p_id;
 						module.executequery(temp);
@@ -151,32 +151,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	        /* Retrieve the entered persons data. */
-
-
-	         
-
-
-
-
-
-		//String new_person = "INSERT INTO persons VALUES("+p_id+", '"+FirstName+"', '"+LastName+"', '"+Address+"', '"+Email+"', "+Phone+")";
-		//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
-
-
-		
 		
         }
 	

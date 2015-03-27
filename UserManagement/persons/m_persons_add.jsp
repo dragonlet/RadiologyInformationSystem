@@ -90,7 +90,10 @@
 		module.executequery(new_person);
 
 		if (module.FailedWithError()){
-			%><P>Failed</P><%}
+			%><P>Failed to Add person.</P><%}
+
+		else{
+			%><P>Successfully Added.</P><%}
 		
         }
 	

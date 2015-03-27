@@ -6,20 +6,20 @@
 
 <%@ include file="../../navbar.jsp" %>
 <HEAD>
-    <TITLE>Person Management</TITLE>
+    <TITLE>User Management</TITLE>
 </HEAD>
 
 <BODY>
 
 <H1>Radiology Information System</H1>
 
-<FORM NAME="Personsform" ACTION="m_persons_delete.jsp" METHOD="post" >
+<FORM NAME="Personsform" ACTION="m_users_delete.jsp" METHOD="post" >
 
-<P>Enter the ID of the person you wish to delete</P>
+<P>Enter the person ID of the user you wish to delete</P>
 
  <TABLE>
 	<TR VALIGN=TOP ALIGN=LEFT>
-	    <TD><B><I>person id:</I></B></TD>
+	    <TD><B><I>Person ID:</I></B></TD>
 	    <TD><INPUT TYPE="text" NAME="PERSONID" VALUE=""><BR></TD>
 	</TR>
 
@@ -47,26 +47,24 @@
 	if(request.getParameter("Delete") != null)
         {
 
-		if (request.getParameter("FIRSTNAME") == "")
-			{
-			%><P>Perfect!! Firstname is NULL!!!!</P><%}
-		
-
 	        /* Retrieve the new persons data. */
 
         	String p_id = (request.getParameter("PERSONID")).trim();
 
-		String delete_person = "DELETE FROM persons WHERE PERSON_ID = " + p_id;
+		String delete_user = "DELETE FROM users WHERE person_id = " + p_id;
 
-		module.executequery(delete_person);
+		module.executequery(delete_user);
 
 		if (module.FailedWithError()){
-			%><P>Failed to delete person.</P><%}
+			%><P>Failed to delete user.</P><%}
 
 		else{
 			%><P>Successfully deleted.</P><%}
 		
         }
+
+// INSERT INTO users VALUES('jack1', 'redrum', 'a', 15, TO_DATE('19801202','YYYYMMDD'));
+//INSERT INTO users VALUES('Matt333', 'test1', 'r', 13, TO_DATE('19910227','YYYYMMDD')); 
 	
 %>
 
