@@ -14,7 +14,7 @@
 
 <FORM NAME="Usersform" ACTION="m_users_add.jsp" METHOD="post" >
 
-<P>Enter new persons information</P>
+<P>Enter new Users information</P>
 
  <TABLE>
 	<TR VALIGN=TOP ALIGN=LEFT>
