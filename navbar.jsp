@@ -10,19 +10,18 @@
 <%
 	}
 	
-	String privileges = (String) session.getAttribute("privileges");
-	if(privileges == null || privileges.isEmpty() )
+	Character privileges = (Character) session.getAttribute("privileges");
+	if(privileges == null)
 	{
 %>
 	<c:redirect url="login.jsp" />
 <%
 	}
-	char priv = privileges.charAt(0);
 %>
 
 <nav>
 	<a href="search.jsp">Search</a>
-	<%switch(priv)
+	<%switch(privileges)
 	{
 		case 'a':
 	%>
