@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<%@include file="includes.jsp" %>
+<%@ include file="includes.jsp" %>
 <%@ page import="com.LoginLayer" %>
 
 <HTML>
 <!-- Login module jsp page. -->
 <% 
+	session = request.getSession();
 	boolean goodLogin = false;
 	boolean attempted = false;
 
@@ -19,8 +20,8 @@
 		if((goodLogin = login.validateLogin(userName, passwd)))
 		{
 			/* username must be cast to String, privileges to Char. 
-			i.e. String username = (String) session.getAttribute("username"); */
-			session.setAttribute("username", userName);
+			i.e. String username = (String) session.getAttribute("user_name"); */
+			session.setAttribute("user_name", userName);
 			session.setAttribute("privileges", login.getPrivs());
 		}
 		attempted = true;		
@@ -43,7 +44,7 @@
     <P>Bad username and/or password. Please try again.</P>
 
     <% } else if(goodLogin && attempted){%>
-    <c:redirect url="search.jsp">
+    <c:redirect url="search.jsp" />
 
     <% } else { %>
     <P>Please Log In.</p>
