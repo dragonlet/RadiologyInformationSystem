@@ -4,7 +4,7 @@ import java.io.*;
 import java.sql.*;
 
 public class LoginLayer extends BaseLayer{
-    private char user_privilege_level;
+    private Character user_privilege_level;
     private boolean logged_in;
     private boolean failure;
 
