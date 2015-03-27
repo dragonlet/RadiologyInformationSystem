@@ -1,45 +1,8 @@
 <!DOCTYPE html>
-
+<%@ include file="../../includes.jsp" %>
 <HTML>
 
-<!-- Management module jsp page. -->
-
-
-<%@ page import="com.ManagementModule" %>
-<% 
-
-	ManagementModule module = new ManagementModule();
-
-
-	if(request.getParameter("Add") != null)
-        {
-
-		if (request.getParameter("FIRSTNAME") == "")
-			{
-			%><P>Perfect!! Firstname is NULL!!!!</P><%}
-		
-
-	        /* Retrieve the new persons data. */
-
-        	String p_id = (request.getParameter("PERSONID")).trim();
-	        String FirstName = (request.getParameter("FIRSTNAME")).trim();
-	        String LastName = (request.getParameter("LASTNAME")).trim();
-	        String Address = (request.getParameter("ADDRESS")).trim();
-	        String Email = (request.getParameter("EMAIL")).trim();
-	        String Phone = (request.getParameter("PHONE")).trim();
-
-		String new_person = "INSERT INTO persons VALUES("+p_id+", '"+FirstName+"', '"+LastName+"', '"+Address+"', '"+Email+"', "+Phone+")";
-		//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
-		
-
-		module.executequery(new_person);
-
-		if (module.FailedWithError()){
-			%><P>Failed</P><%}
-		
-        }
-	
-%>
+<%@ include file="../../navbar.jsp" %>
 
 <HEAD>
     <TITLE>Person Management</TITLE>
@@ -85,10 +48,54 @@
 
 </FORM>
 
-<FORM NAME="Return" ACTION="../m_module.html" METHOD="post" >
+<FORM NAME="Return" ACTION="../../UserManagement.jsp" METHOD="post" >
 <INPUT TYPE="submit" NAME="Submit" VALUE="Return Home">
 </FORM>
 
 </BODY>
+
+
+
+
+<!-- Management module jsp page. -->
+
+
+<%@ page import="com.ManagementModule" %>
+<% 
+
+	ManagementModule module = new ManagementModule();
+
+
+	if(request.getParameter("Add") != null)
+        {
+
+		if (request.getParameter("FIRSTNAME") == "")
+			{
+			%><P>Perfect!! Firstname is NULL!!!!</P><%}
+		
+
+	        /* Retrieve the new persons data. */
+
+        	String p_id = (request.getParameter("PERSONID")).trim();
+	        String FirstName = (request.getParameter("FIRSTNAME")).trim();
+	        String LastName = (request.getParameter("LASTNAME")).trim();
+	        String Address = (request.getParameter("ADDRESS")).trim();
+	        String Email = (request.getParameter("EMAIL")).trim();
+	        String Phone = (request.getParameter("PHONE")).trim();
+
+		String new_person = "INSERT INTO persons VALUES("+p_id+", '"+FirstName+"', '"+LastName+"', '"+Address+"', '"+Email+"', "+Phone+")";
+		//String new_person = "INSERT INTO persons VALUES(15, 'Jack', 'Torrence', 'Overlook', 'jack@overlook.com', 7804848435)";
+		
+
+		module.executequery(new_person);
+
+		if (module.FailedWithError()){
+			%><P>Failed</P><%}
+		
+        }
+	
+%>
+
+
 
 </HTML>

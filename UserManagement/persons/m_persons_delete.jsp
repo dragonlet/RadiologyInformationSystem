@@ -1,8 +1,41 @@
 <!DOCTYPE html>
-
+<%@ include file="../../includes.jsp" %>
 <HTML>
 
 <!-- Management module jsp page. -->
+
+<%@ include file="../../navbar.jsp" %>
+<HEAD>
+    <TITLE>Person Management</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>Radiology Information System</H1>
+
+<FORM NAME="Personsform" ACTION="m_persons_delete.jsp" METHOD="post" >
+
+<P>Enter the ID of the person you wish to delete</P>
+
+ <TABLE>
+	<TR VALIGN=TOP ALIGN=LEFT>
+	    <TD><B><I>person id:</I></B></TD>
+	    <TD><INPUT TYPE="text" NAME="PERSONID" VALUE=""><BR></TD>
+	</TR>
+
+    </TABLE>
+
+<INPUT TYPE="submit" NAME="Add" VALUE="Delete">
+
+</FORM>
+
+<FORM NAME="Return" ACTION="../../UserManagement.jsp" METHOD="post" >
+<INPUT TYPE="submit" NAME="Submit" VALUE="Return Home">
+</FORM>
+
+</BODY>
+
+
 
 
 <%@ page import="com.ManagementModule" %>
@@ -37,34 +70,5 @@
 	
 %>
 
-<HEAD>
-    <TITLE>Person Management</TITLE>
-</HEAD>
-
-<BODY>
-
-<H1>Radiology Information System</H1>
-
-<FORM NAME="Personsform" ACTION="m_persons_delete.jsp" METHOD="post" >
-
-<P>Enter the ID of the person you wish to delete</P>
-
- <TABLE>
-	<TR VALIGN=TOP ALIGN=LEFT>
-	    <TD><B><I>person id:</I></B></TD>
-	    <TD><INPUT TYPE="text" NAME="PERSONID" VALUE=""><BR></TD>
-	</TR>
-
-    </TABLE>
-
-<INPUT TYPE="submit" NAME="Add" VALUE="Delete">
-
-</FORM>
-
-<FORM NAME="Return" ACTION="../m_module.html" METHOD="post" >
-<INPUT TYPE="submit" NAME="Submit" VALUE="Return Home">
-</FORM>
-
-</BODY>
 
 </HTML>
