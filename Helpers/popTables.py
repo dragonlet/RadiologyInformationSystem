@@ -115,6 +115,27 @@ vals6 = "1006, 10, 11, 8, 'ULTRASOUND', TO_DATE('20061031','YYYYMMDD'), TO_DATE(
 
 radrec = [vals1,vals2,vals3,vals4,vals5,vals6]
 
+'''
+CREATE TABLE pacs_images (
+   record_id   int,
+   image_id    int,
+   thumbnail   blob,
+   regular_size blob,
+   full_size    blob,
+   PRIMARY KEY(record_id,image_id),
+   FOREIGN KEY(record_id) REFERENCES radiology_record
+);
+'''
+
+pacs1 = "1001, 11, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+pacs2 = "1002, 13, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+pacs3 = "1003, 17, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+pacs4 = "1004, 19, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+pacs5 = "1005, 23, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+pacs6 = "1006, 29, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB()"
+
+pacs = [pacs1, pacs2, pacs3, pacs4, pacs5, pacs6]
+
 #Table generation
 for key in person_ids:
     #persons table
@@ -131,3 +152,7 @@ for key in famdoc:
 for rec in radrec:
     #radiology_record table
     print("INSERT INTO radiology_record values("+rec+");")
+
+for rec in pacs:
+    #pacs_images table
+    print("INSERT INTO pacs_images values("+rec+");")
