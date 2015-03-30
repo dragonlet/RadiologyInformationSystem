@@ -26,7 +26,7 @@
 				session.setAttribute("privileges", login.getPrivs());
 			}
 		}
-		catch {
+		catch (Exception ex){
 			/* Redirect to error page. */
 		}
 		attempted = true;		
@@ -75,5 +75,4 @@
 </BODY>
 
 </HTML>
-
 

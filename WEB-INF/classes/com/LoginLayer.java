@@ -33,41 +33,34 @@ public class LoginLayer extends BaseLayer{
     public boolean validateLogin(String username, String password)
 	throws BaseLayerException, SQLException
     {
-		ResultSet rset = null;
-		String truepwd = null;
-		String user_class = null;
+	ResultSet rset = null;
+	String truepwd = null;
+	String user_class = null;
 	
-		openConnection();
-		rset = GetQueryResult(genValidateUserSql(username));
-		
-		try
+	openConnection();
+	rset = GetQueryResult(genValidateUserSql(username));
+
+	while(rset != null && rset.next())
 	    {
-			while(rset != null && rset.next())
-		    {
-				truepwd = (rset.getString("password")).trim();
-				user_class = (rset.getString("class")).trim();
-		    }
-	    }
-		catch(Exception ex)
-	    {
-			//Should we make a Login Layer Exception for this??
-			throw ex;
+		truepwd = (rset.getString("password")).trim();
+		user_class = (rset.getString("class")).trim();
 	    }
 
-		if(truepwd == null)
+
+	if(truepwd == null)
 	    {
-			/* No matching rows were found => Password is incorrect. */
-			return false;
+		/* No matching rows were found => Password is incorrect. */
+		return false;
 	    }
 			
-		/* If valid, log the user in with the appropriate priviliges. */
-		if(truepwd.length() > 0 && password.equals(truepwd))
+	/* If valid, log the user in with the appropriate priviliges. */
+	if(truepwd.length() > 0 && password.equals(truepwd))
 	    {
-			logged_in = true;
-			user_privilege_level = user_class.charAt(0);
+		logged_in = true;
+		user_privilege_level = user_class.charAt(0);
 	    }
 
-		closeConnection();
+	closeConnection();
 
 		return logged_in;
     }
