@@ -69,8 +69,9 @@
 	        String Password = (request.getParameter("PASSWORD")).trim();
 	        String Class = (request.getParameter("CLASS")).trim();
 
+		String date = module.getDate();
 
-		String new_user = "INSERT INTO users VALUES('"+UserName+"', '"+Password+"', '"+Class+"', "+p_id+", TO_DATE('19801202','YYYYMMDD'))";
+		String new_user = "INSERT INTO users VALUES('"+UserName+"', '"+Password+"', '"+Class+"', "+p_id+", TO_DATE('"+date+"','YYYYMMDD'))";
 
 		module.executequery(new_user);
 
