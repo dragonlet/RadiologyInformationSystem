@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<%@ include file="../../includes.jsp" %>
+<%@ include file="includes.jsp" %>
 
 <HTML>
 
 <!-- Management module jsp page. -->
 
-<%@ include file="../../navbar.jsp" %>
+<%@ include file="navbar.jsp" %>
 
 <HEAD>
     <TITLE>User Management</TITLE>
@@ -48,7 +48,7 @@
 
 </FORM>
 
-<FORM NAME="Return" ACTION="../../UserManagement.jsp" METHOD="post" >
+<FORM NAME="Return" ACTION="UserManagement.jsp" METHOD="post" >
 <INPUT TYPE="submit" NAME="Submit" VALUE="Return Home">
 </FORM>
 
