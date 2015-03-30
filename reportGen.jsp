@@ -44,10 +44,10 @@
 
      		if(valid_date_format)
      			{
-     				start_date = start_date.replace("/", "");
-     				end_date = end_date.replace("/", "");
+     				String s_start_date = start_date.replace("/", "");
+     				String s_end_date = end_date.replace("/", "");
 				try {
-     					report.generateReport(diagnosis, start_date, end_date);
+     					report.generateReport(diagnosis, s_start_date, s_end_date);
 					success = true;
 				    }
 				catch(Exception ex)
@@ -83,7 +83,7 @@
     <H1>Radiology Information System</H1>
 
     <% 
-       if(session.getAttribute("username") == null) 
+       if(session.getAttribute("user_name") == null) 
        		{
        			response.sendRedirect("login.jsp");
        		}
@@ -101,13 +101,13 @@
     <FORM NAME="ReportForm" ACTION="reportGen.jsp" METHOD="post" >
 
       <P>Patients with Diagnosis:</P>
-      <INPUT TYPE="text" NAME="DIAGNOSIS" placeholder="<% out.println(diagnosis); %>" size="25">
+      <INPUT TYPE="text" NAME="DIAGNOSIS" placeholder="diagnosis" size="25">
       <br>
       <P>Tested Between Dates:</P>
-      <INPUT TYPE="text" NAME="STARTDATE" placeholder="<% out.println(start_date); %>" size="10">
+      <INPUT TYPE="text" NAME="STARTDATE" placeholder="yyyy/mm/dd" size="10">
 
       <P>and</P>
-      <INPUT TYPE="text" NAME="ENDDATE" placeholder="<% out.println(end_date); %>" size="10">
+      <INPUT TYPE="text" NAME="ENDDATE" placeholder="yyyy/mm/dd" size="10">
 
       <br>
       <INPUT TYPE="submit" NAME="Submit" VALUE="Generate Report">
@@ -119,6 +119,8 @@
     <% } %>
 
     <% if(success && report.found) { %>
+
+<P>Records found matching "<% out.println(diagnosis); %>" between <% out.println(start_date); %> and <% out.println(end_date); %>:</P>
 
 <table>
 	<tr>
