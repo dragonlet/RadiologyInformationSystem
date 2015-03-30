@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<%@ include file="includes.jsp" %>
 <html>
   <%@ page import="com.ReportModule" %>
   <% 
