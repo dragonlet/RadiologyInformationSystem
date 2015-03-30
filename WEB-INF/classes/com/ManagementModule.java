@@ -3,6 +3,9 @@ package com;
 import java.lang.*;
 import java.io.*;
 import java.sql.*;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 //*******************************************************
@@ -81,6 +84,16 @@ public class ManagementModule extends BaseLayer {
 		closeConnection();
 
 		return ID_class;
+
+	}
+
+
+	public String getDate()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		//get current date time with Date()
+		Date date = new Date();
+		return dateFormat.format(date);
 
 	}
 
