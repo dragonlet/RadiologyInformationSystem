@@ -60,16 +60,33 @@
         	String doctor_id = (request.getParameter("DOCTORID")).trim();
         	String patient_id = (request.getParameter("PATIENTID")).trim();
 
+		boolean isDoctor  = false;
+		boolean isPatient = false;
 
-		String new_pair = "INSERT INTO family_doctor VALUES("+doctor_id+", "+patient_id+")";
+		if (module.getClass(doctor_id).equals("d"))
+			isDoctor = true;
+		else
+			%><P>Doctor ID either does not exist or is not a doctor.</P><%
 
-		module.executequery(new_pair);
+		if (module.getClass(patient_id).equals("p"))
+			isPatient = true;
+		else
+			%><P>Patient ID either does not exist or is not a Patient.</P><%
 
-		if (module.FailedWithError()){
-			%><P>Failed to Add Doctor/Patient Pair.</P><%}
 
-		else{
-			%><P>Successfully Added.</P><%}
+		if (isDoctor && isPatient){
+
+			String new_pair = "INSERT INTO family_doctor VALUES("+doctor_id+", "+patient_id+")";
+			module.executequery(new_pair);
+
+			if (module.FailedWithError())
+				%><P>Failed to Add Doctor/Patient Pair.</P><%
+
+			else
+				%><P>Successfully Added.</P><%
+		}
+
+
 		
         }
 	
