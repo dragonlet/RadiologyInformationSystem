@@ -10,9 +10,7 @@ import java.text.SimpleDateFormat;
 
 //*******************************************************
 //               My Account Layer
-// java code for user with management privilages.
-// TO DO: -discuss if delete is required (project 
-//	   specification only references update and new)
+// java code for users own account settings
 //*******************************************************
 public class MyAccountLayer extends BaseLayer {
 
