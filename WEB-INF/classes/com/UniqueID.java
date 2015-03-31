@@ -15,47 +15,20 @@ import java.util.Random;
    because it logs in seperately to check existing ids.
 */
 
-public class UniqueID {
+public class UniqueID extends BaseLayer{
 
-    public String error_printout;
-
-    public UniqueID()
-    {	
+    public UniqueID(){}	
 	/* Container class for ID generation method. 
 	   generate returns 0 if there is an error and
 	   stores the exception data in error_printout. 
 	   Returns a new unique id otherwise. */
-	error_printout = "So far, so good.";
-    }
 
-    public int generate(String type)
+    public int generate(String type) throws BaseLayerException, SQLException
     {
 	Random rand = new Random();
 
 	/*  Establish connectionn to DB.*/
-        Connection conn = null;	
-	String driverName = "oracle.jdbc.driver.OracleDriver";
-        String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-	try{
-	    /* Load and register the driver. */
-	    Class drvClass = Class.forName(driverName); 
-	    DriverManager.registerDriver((Driver) drvClass.newInstance());
-	}
-	catch(Exception ex){
-	    error_printout = "<hr>" + ex.getMessage() + "<hr>";
-	    return 0;
-	}
-	
-	try{
-	    /* Establish the connection */
-	    conn = DriverManager.getConnection(dbstring,"USERNAME","PASSWORD"); /* Oracle login info here */
-	    conn.setAutoCommit(false);
-	}
-	catch(Exception ex){
-	        
-	    error_printout = "<hr>" + ex.getMessage() + "<hr>";
-	    return 0;
-	}
+	openConnection();
 
 	Statement stmt = null;
 	ResultSet rset = null;
@@ -79,36 +52,22 @@ public class UniqueID {
 	    }
 
 	/* Query the DB to obtain the set of existing IDs. */
-	try{
-	    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	    rset = stmt.executeQuery(select_data);
-	}	
-	catch(Exception ex){
-	    error_printout = "<hr>" + ex.getMessage() + "<hr>";
-	    return 0;
-	}
+	rset = GetQueryResult(select_data);
 
 	int extant_id;
 
-	try
+	while(rset != null && rset.next())
 	    {
-		while(rset != null && rset.next())
+		/* Obtain existing id from row and compare to generated integer. */
+		extant_id = Integer.parseInt(rset.getString(type+"_id").trim());
+		if(extant_id == new_id)
 		    {
-			/* Obtain existing id from row and compare to generated integer. */
-			extant_id = Integer.parseInt(rset.getString(type+"_id").trim());
-			if(extant_id == new_id)
-			    {
-				/* If this number already exists in the table, create a new id and try again. */
-				new_id = rand.nextInt(89999) + 10000;
-				rset.beforeFirst();
-			    }
+			/* If this number already exists in the table, create a new id and try again. */
+			new_id = rand.nextInt(89999) + 10000;
+			rset.beforeFirst();
 		    }
 	    }
-	catch(Exception ex)
-	    {
-		error_printout = "<hr>" + ex.getMessage() + "<hr>";
-		return 0;
-	    }
+
 	return new_id;
     }
 }
