@@ -11,8 +11,6 @@ import java.text.SimpleDateFormat;
 //*******************************************************
 //               MANAGEMENT MODULE
 // java code for user with management privilages.
-// TO DO: -discuss if delete is required (project 
-//	   specification only references update and new)
 //*******************************************************
 public class ManagementModule extends BaseLayer {
 
