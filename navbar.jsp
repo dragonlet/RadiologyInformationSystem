@@ -49,5 +49,6 @@
 	<%
 	}
 	%>
+	<a href="myAccount.jsp">My Account</a>
 	<a href="logout.jsp">Logout</a>
 </nav>

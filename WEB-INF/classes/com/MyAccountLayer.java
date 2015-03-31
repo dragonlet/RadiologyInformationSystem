@@ -9,16 +9,16 @@ import java.text.SimpleDateFormat;
 
 
 //*******************************************************
-//               MANAGEMENT MODULE
-// java code for user with management privilages.
+//               My Account Layer
+// java code for users own account settings
 //*******************************************************
-public class ManagementModule extends BaseLayer {
+public class MyAccountLayer extends BaseLayer {
 
 	private boolean failure;
 	private Connection conn;
 	public String error_printout;
 
-	public ManagementModule(){
+	public MyAccountLayer(){
 		failure = false;
 	}
 
@@ -27,12 +27,8 @@ public class ManagementModule extends BaseLayer {
 		return failure;
     	}
 
-	// takes in a query statment, establishes connection, and executes the query;
 	public Boolean executequery(String query){ 
 
-		
-
-		
 		ResultSet rset = null;
 
 		try
@@ -58,51 +54,33 @@ public class ManagementModule extends BaseLayer {
 		return false;
 	    }
 
-
 	return true;
 	}
 
-	// returns the user class given the passed ID
-	public String getClass(String ID) throws BaseLayerException, SQLException
+
+	public String getID(String user_name) throws BaseLayerException, SQLException
 
 	{
 		
 		ResultSet rset = null;
-		String ID_class = "";
+		String ID = "";
 
 		openConnection();
-		rset = GetQueryResult("select class from users where person_id = " + ID);// select only the class of the given user
+		rset = GetQueryResult("select person_id from users where user_name = '" + user_name +"'");// select only the class of the given user
 
 		while(rset != null && rset.next())
 		    {
-			ID_class = (rset.getString("class")).trim();
+			ID = (rset.getString("person_id")).trim();
 		    }
 
 
 		closeConnection();
 
-		return ID_class;
+		return ID;
 
 	}
-
-
-	public String getDate()
-	{
-		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		//get current date time with Date()
-		Date date = new Date();
-		return dateFormat.format(date);
-
-	}
-
-
-
-
-
-
 
 }
-
 
 
 
