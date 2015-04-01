@@ -63,9 +63,8 @@
 		
         }
 
-// INSERT INTO users VALUES('jack1', 'redrum', 'a', 15, TO_DATE('19801202','YYYYMMDD'));
-//INSERT INTO users VALUES('Matt333', 'test1', 'r', 13, TO_DATE('19910227','YYYYMMDD')); 
-	
+        		%><P> </P><%
+		out.println(module.getUsersTable());
 %>
 
 
