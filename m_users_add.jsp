@@ -82,6 +82,9 @@
 			%><P>Successfully Added.</P><%}
 		
         }
+        
+                		%><P> </P><%
+		out.println(module.getUsersTable());
 	
 %>
 
