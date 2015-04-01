@@ -125,6 +125,9 @@
 
 		
         }
+        
+                		%><P> </P><%
+		out.println(module.getUsersTable());
 	
 %>
 
