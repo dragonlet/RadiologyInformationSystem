@@ -89,6 +89,9 @@
 
 		
         }
+        
+        		%><P> </P><%
+		out.println(module.getDoctorsTable());
 	
 %>
 
