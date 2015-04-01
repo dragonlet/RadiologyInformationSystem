@@ -25,4 +25,12 @@
 
 </BODY>
 
+<%@ page import="com.ManagementModule" %>
+
+<%		ManagementModule module = new ManagementModule();
+
+		%><P> </P><%
+		out.println(module.getDoctorsTable());
+%>
+
 </HTML>
