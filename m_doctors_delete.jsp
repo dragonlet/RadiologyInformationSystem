@@ -67,7 +67,8 @@
 			%><P>Successfully deleted.</P><%}
 		
         }
-
+        		%><P> </P><%
+		out.println(module.getDoctorsTable());
 	
 %>
 
