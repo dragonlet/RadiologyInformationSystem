@@ -73,7 +73,15 @@
 
 	        /* Retrieve the new persons data. */
 
-        	int    p_id = idGen.generate("person");
+        	int    p_id = 0;
+
+		try {
+			p_id = idGen.generate("person");}
+
+		catch (Exception ex) {
+			%><P>Failed to generate unique ID</P><%}
+
+
 
 		if (p_id != 0){
 
