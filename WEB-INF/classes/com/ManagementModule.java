@@ -97,12 +97,97 @@ public class ManagementModule extends BaseLayer {
 
 
 
+	public String getPersonsTable() throws BaseLayerException, SQLException
+	{
+		ResultSet rset = null;
+		String results = "";
+		openConnection();
+		rset = GetQueryResult("select * from persons");
+
+		if (rset != null){
+			results = "<table border=1> <tr> <th>ID</th> <th>First Name</th> <th>Last Name</th> <th>Address</th> <th>Email</th> <th>Phone Number</th> </tr>" + "<tr>";
+			while(rset.next())
+			    {
+				results = results + "<td>" + rset.getString(1) + "</td>";
+				results = results + "<td>" + rset.getString(2) + "</td>";
+				results = results + "<td>" + rset.getString(3) + "</td>";
+				results = results + "<td>" + rset.getString(4) + "</td>";
+				results = results + "<td>" + rset.getString(5) + "</td>";
+				results = results + "<td>" + rset.getString(6) + "</td>";
+				results = results + "</tr>";
+			    }
+			results = results + "</table>";
+
+		}
+
+
+		closeConnection();
+
+
+		return results;
+	}
+
+
+	public String getUsersTable() throws BaseLayerException, SQLException
+	{
+		ResultSet rset = null;
+		String results = "";
+		openConnection();
+		rset = GetQueryResult("select * from users");
+
+		if (rset != null){
+			results = "<table border=1> <tr> <th>User Name</th> <th>Class</th> <th>ID</th> <th>Date Registered</th> </tr>" + "<tr>";
+			while(rset.next())
+			    {
+				results = results + "<td>" + rset.getString(1) + "</td>";
+				results = results + "<td>" + rset.getString(3) + "</td>";
+				results = results + "<td>" + rset.getString(4) + "</td>";
+				results = results + "<td>" + rset.getString(5) + "</td>";
+				results = results + "</tr>";
+			    }
+			results = results + "</table>";
+
+		}
+
+
+		closeConnection();
+
+
+		return results;
+	}
+
+
+	public String getDoctorsTable() throws BaseLayerException, SQLException
+	{
+		ResultSet rset = null;
+		String results = "";
+		openConnection();
+		rset = GetQueryResult("select * from family_doctor");
+
+		if (rset != null){
+			results = "<table border=1> <tr> <th>Doctor ID</th> <th>Patient ID</th> </tr>" + "<tr>";
+			while(rset.next())
+			    {
+				results = results + "<td>" + rset.getString(1) + "</td>";
+				results = results + "<td>" + rset.getString(2) + "</td>";
+				results = results + "</tr>";
+			    }
+			results = results + "</table>";
+
+		}
+
+
+		closeConnection();
+
+
+		return results;
+	}
+
 
 
 
 
 }
-
 
 
 
