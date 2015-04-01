@@ -154,6 +154,8 @@
 		
         }
 	
+			%><P> </P><%
+		out.println(module.getPersonsTable());
 %>
 
 
