@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ include file="includes.jsp" %>
 
+
 <HTML>
 <%@ include file="navbar.jsp" %>
 
@@ -27,5 +28,15 @@
 </FORM>
 
 </BODY>
+
+<%@ page import="com.ManagementModule" %>
+
+<%		ManagementModule module = new ManagementModule();
+
+		%><P> </P><%
+		out.println(module.getPersonsTable());
+%>
+
+
 
 </HTML>
