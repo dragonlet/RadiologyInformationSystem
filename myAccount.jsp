@@ -50,11 +50,7 @@
 	</TR>
     </TABLE>
 
-</FORM>
 
-<FORM NAME="Return" ACTION="UserManagement.jsp" METHOD="post" >
-<INPUT TYPE="submit" NAME="Submit" VALUE="Return Home">
-</FORM>
 
 </BODY>
 
