@@ -135,13 +135,13 @@ public class SearchLayer extends BaseLayer {
 	    {
 		error_printout = "<hr>" + ex.getMessage() + "<hr>";
 		failure = true;
-		return "1";
+		return "<hr>" + ex.getMessage() + "<hr>";
 	    }
 
 
 
 
-              String doSearch = "SELECT score('"+query+"'), record_id, description FROM radiology_record WHERE contains(description, ?, 1) > 0 order by score('"+query+"') desc";
+              String doSearch = "SELECT score(1), record_id, description FROM radiology_record WHERE contains(description, '"+query+"', 1) > 0 order by score(1) desc";
 
              
 		try{
@@ -149,7 +149,7 @@ public class SearchLayer extends BaseLayer {
 		}
 		catch(Exception ex)
 		{
-			return "2";
+			return "<hr>" + ex.getMessage() + "<hr>";
 		} 
 
 
@@ -180,7 +180,7 @@ public class SearchLayer extends BaseLayer {
               }
 	      catch(Exception ex)
 		{
-			return "3";
+			return "<hr>" + ex.getMessage() + "<hr>";
 		}                
           
 
