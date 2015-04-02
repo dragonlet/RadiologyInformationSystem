@@ -83,15 +83,10 @@
     <H1>Radiology Information System</H1>
 
     <% 
-       if(session.getAttribute("user_name") == null) 
+       if((Character) session.getAttribute("privileges") != 'a') 
        		{
-       			response.sendRedirect("login.jsp");
-       		}
-       else if((Character) session.getAttribute("privileges") != 'a')
-       		{
-       %>
-    <H2>You do not have permission to access this page.</H2>
-    <P>Your IP has been traced and the authorities are en route.</P>
+    %>
+	<H2>This page requires system administrator privileges.</H2>
     <%
        		}
        		else
