@@ -27,7 +27,7 @@
 	%>
 	<a href="UserManagement.jsp">User Management</a>
 	<a href="reportGen.jsp">Reports</a>
-	<a href="DataAnalysis.jsp">Analysis</a>
+	<a href="dataAnalysis.jsp">Analysis</a>
 	<%
 		break;
 		case 'p':
