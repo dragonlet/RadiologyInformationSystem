@@ -20,52 +20,17 @@
     <%@ page import="com.SearchLayer" %>
     <%
 
+
+
 	SearchLayer search = new SearchLayer();
 
 	out.println(search.Display());
 
-      String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-      String m_driverName = "oracle.jdbc.driver.OracleDriver";
-      
-      String m_userName = "mrgallag"; //supply username
-      String m_password = "iCaprica6"; //supply password
-      
-      String addItemError = "";
-      
-      Connection m_con;
-      String createString;
-      String selectString = "select * from radiology_record";
-      Statement stmt;
-      
-      try
-      {
-      
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-        m_con = DriverManager.getConnection(m_url, m_userName, m_password);
-        
-      } 
-      catch(Exception e)
-      {      
-        out.print("Error displaying data: ");
-        out.println(e.getMessage());
-        return;
-      }
-
-      try
-      {
-             
-       
+     
         if(request.getParameter("updateIndex") != null)
         {
         }
-        
-        stmt = m_con.createStatement();
-        
-        stmt.close();     
-       
-      
+
     %>
     
     
@@ -97,48 +62,9 @@
           	out.println("<br>");
           
 		out.println(search.DescriptionSearch(request.getParameter("query")));
-
-
-            if(false)
-            {
-              PreparedStatement doSearch = m_con.prepareStatement("SELECT score(1), record_id, description FROM radiology_record WHERE contains(description, ?, 1) > 0 order by score(1) desc");
-              doSearch.setString(1, request.getParameter("query"));
-              ResultSet rset2 = doSearch.executeQuery();
-              out.println("<table border=1>");
-              out.println("<tr>");
-              out.println("<th>Record ID</th>");
-              out.println("<th>Description</th>");
-              out.println("<th>Score</th>");
-              out.println("</tr>");
-              while(rset2.next())
-              {
-                out.println("<tr>");
-                out.println("<td>"); 
-                out.println(rset2.getString(2));
-                out.println("</td>");
-                out.println("<td>"); 
-                out.println(rset2.getString(3)); 
-                out.println("</td>");
-                out.println("<td>");
-                out.println(rset2.getObject(1));
-                out.println("</td>");
-                out.println("</tr>");
-              } 
-              out.println("</table>");
-            }
-            else
-            {
-              out.println("<br><b>Please enter text for quering</b>");
-            }            
+              
           }
-          m_con.close();
-        }
-        catch(SQLException e)
-        {
-          out.println("SQLException: " +
-          e.getMessage());
-			m_con.rollback();
-        }
+
       %>
     </form>
   </body>
