@@ -1,8 +1,12 @@
 package com;
-import java.util.*;
 import java.lang.*;
 import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.sql.*;
+import java.util.*;
+import oracle.sql.*;
+import oracle.jdbc.*;
 
 public class UploadLayer extends BaseLayer{
 	private final static String DOC_QUERY =	"select * from persons where person_id IN (select doctor_id from family_doctor)";
@@ -41,7 +45,21 @@ public class UploadLayer extends BaseLayer{
 			
 			stmt.executeUpdate();
 		}catch(Exception ex){
-			throw new BaseLayerException("Error with updating DB set: " + ex.getMessage(), ex);
+			throw new BaseLayerException("Error with saving record: " + ex.getMessage(), ex);
+		}
+		
+		closeConnection();
+	}
+	
+	public void addImg(Integer record_id, FileItem img)
+	throws BaseLayerException
+	{
+		openConnection();
+		
+		try{
+			
+		}catch(Exception ex){
+			throw new BaseLayerException("Error with saving image: " + ex.getMessage(), ex);
 		}
 		
 		closeConnection();

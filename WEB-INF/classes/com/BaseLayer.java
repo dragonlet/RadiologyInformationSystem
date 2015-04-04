@@ -72,7 +72,21 @@ public class BaseLayer{
 	    }
 	catch(Exception ex)
 	    {
-		throw new BaseLayerException("Error in closing connection to DB: " + ex.getMessage(), ex);
+		throw new BaseLayerException("Error in preparing statement: " + ex.getMessage(), ex);
+	    }
+    }
+	
+	public boolean execute(String sql)
+	throws BaseLayerException
+    {
+	try
+	    {
+		Statement stmt = conn.createStatement();
+		return  stmt.execute(sql);
+	    }
+	catch(Exception ex)
+	    {
+		throw new BaseLayerException("Error in executing statement: " + ex.getMessage(), ex);
 	    }
     }
 }
