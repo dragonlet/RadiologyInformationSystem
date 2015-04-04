@@ -2,7 +2,7 @@
 <%@ page import="java.util.*, java.sql.*, com.UploadLayer, com.Person" %>
 
 <HTML>
-<%//@ include file="navbar.jsp" %>
+<%@ include file="navbar.jsp" %>
 
 <%
 	session = request.getSession();
@@ -28,7 +28,7 @@
 <Form Name="RecordForm" Action="view.jsp" Method="post" >
  
 	Prescribing Doctor:
-	<select name="doctor_id">
+	<select name="doctor_id" >
 	<% while(_doctors.hasNext()){
 		_doc = _doctors.next(); %>
 		<option value="<%= _doc.getID() %>" >
@@ -38,7 +38,7 @@
 	</select><br>
 	
 	Patient:
-	<select name="patient_id">
+	<select name="patient_id" >
 	<% while(_patients.hasNext()){
 		_pat = _patients.next(); %>
 		<option value="<%= _pat.getID()%>" >
@@ -47,17 +47,17 @@
 	<% } %>
 	</select><br>
 	
-	Test Type: <input type="text" name="test_type" size="24"><br>
+	Test Type: <input type="text" name="test_type" size="24" required><br>
 	
-	Date of Prescription: <input type="date" name="prescription_date" ><br>
+	Date of Prescription: <input type="date" name="prescription_date" required><br>
 	
-	Date of Test: <input type="date" name="test_date" ><br>
+	Date of Test: <input type="date" name="test_date" required><br>
 	
-	Diagnosis: <input type="text" name="diagnosis" size="128" ><br>
+	Diagnosis: <input type="text" name="diagnosis" size="128" required><br>
 	
-	Description: <input type="text" name="description" size="1024" ><br>
+	Description: <input type="text" name="description" size="1024" required><br>
 	
-	<input type="hidden" name="radiologist_id" value="<%=(Integer)session.getAttribute("person_id")%>" >
+	<input type="hidden" name="radiologist_id" value="<%=(String)session.getAttribute("person_id")%>" >
 	<input type="hidden" name="new" value="true" >
 	
 	<input type="submit" value="Submit" >

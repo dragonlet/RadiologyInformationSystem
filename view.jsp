@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page import="java.util.*, java.sql.*, com.UploadLayer, com.Person" %>
+<%@ page import="java.util.*, java.sql.*, java.text.*, com.UploadLayer, com.Person, com.UniqueID" %>
 
 <% //@ include file="navbar.jsp" %>
 
@@ -22,7 +22,7 @@ if(request.getParameter("new") != null)
 	}
 	
 	try{
-		SimpleDateFormat _sdf = new SimpleDateFormat("yyyy-MM-dd") 
+		SimpleDateFormat _sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		_ul.addRecord(id,
 			Integer.parseInt(request.getParameter("doctor_id")),
@@ -37,6 +37,7 @@ if(request.getParameter("new") != null)
 		
 		valid = true;
 	}catch(Exception ex){
+		out.println(ex.message());
 		valid = false;
 	}
 }
