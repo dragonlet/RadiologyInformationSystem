@@ -61,7 +61,7 @@
           	out.println("Query is " + request.getParameter("query"));
           	out.println("<br>");
           
-		out.println(module.Search(request.getParameter("query")));
+		out.println(module.SearchRadiologist(request.getParameter("query"), 4));
               
           }
 
