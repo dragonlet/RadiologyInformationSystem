@@ -23,6 +23,7 @@
 
 
 	SearchLayer module = new SearchLayer();
+	session = request.getSession();
 
 	out.println(module.Display());
 
@@ -61,7 +62,31 @@
           	out.println("Query is " + request.getParameter("query"));
           	out.println("<br>");
           
-		out.println(module.SearchRadiologist(request.getParameter("query"), 4));
+
+		char privilege = (Character) session.getAttribute("privileges");
+		String ID = (String) session.getAttribute("person_id");
+
+		if (privilege == 'a')
+		{%><P>admin</P><%
+		out.println(module.SearchAll(request.getParameter("query")));
+		}
+
+		if (privilege == 'd')
+		{%><P>doctor</P><%
+		out.println(module.SearchDoctor(request.getParameter("query"), ID));
+		}
+
+		if (privilege == 'p')
+		{%><P>patient</P><%
+		out.println(module.SearchPatient(request.getParameter("query"), ID));
+		}
+
+		if (privilege == 'r')
+		{%><P>radiologist</P><%
+		out.println(module.SearchRadiologist(request.getParameter("query"), ID));
+		}
+
+
               
           }
 
