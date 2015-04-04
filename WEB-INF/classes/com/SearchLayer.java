@@ -138,7 +138,7 @@ public class SearchLayer extends BaseLayer {
 	}
 
 
-	public String SearchAll(String query){
+	public String SearchAll(String query, String order){
 
 
 
@@ -178,7 +178,9 @@ String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as
 //String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as score, record_id, first_name, last_name FROM persons, radiology_record WHERE (contains(last_name, '"+query+"', 1) >= 0) AND person_id = patient_id";
 
 
-String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) order by aggregate_score desc";
+//String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) order by aggregate_score desc";
+
+String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) " + order;
 
 
              
@@ -293,7 +295,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchPatient(String query, String ID){
+	public String SearchPatient(String query, String order, String ID){
 
 
 
@@ -333,7 +335,7 @@ String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as
 //String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as score, record_id, first_name, last_name FROM persons, radiology_record WHERE (contains(last_name, '"+query+"', 1) >= 0) AND person_id = patient_id";
 
 
-String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) order by aggregate_score desc";
+String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0)  " + order;
 
 
              
@@ -447,7 +449,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchDoctor(String query, String ID){
+	public String SearchDoctor(String query, String order, String ID){
 
 
 
@@ -487,7 +489,7 @@ String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as
 //String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as score, record_id, first_name, last_name FROM persons, radiology_record WHERE (contains(last_name, '"+query+"', 1) >= 0) AND person_id = patient_id";
 
 
-String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) order by aggregate_score desc";
+String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0)  " + order;
 
 
              
@@ -599,7 +601,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchRadiologist(String query, String ID){
+	public String SearchRadiologist(String query, String order, String ID){
 
 
 
@@ -639,7 +641,7 @@ String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as
 //String searchLname = "CREATE OR REPLACE VIEW tempLname AS SELECT score(1) * 6 as score, record_id, first_name, last_name FROM persons, radiology_record WHERE (contains(last_name, '"+query+"', 1) >= 0) AND person_id = patient_id";
 
 
-String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) order by aggregate_score desc";
+String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score + DI.score + PF.score + PL.score AS aggregate_score, DE.patient_id, DE.doctor_id, DE.radiologist_id, DE.test_type, DE.prescribing_date, DE.test_date,  DE.description, DI.diagnosis, PF.first_name, PL.last_name FROM tempDesc DE, tempDiag DI, tempFname PF, tempLname PL WHERE DE.record_id = DI.record_id AND DE.record_id = PF.record_id AND DE.record_id = PL.record_id AND ((DE.score + DI.score + PF.score + PL.score) > 0) " + order;
 
 
              
@@ -752,7 +754,6 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 }
-
 
 
 
