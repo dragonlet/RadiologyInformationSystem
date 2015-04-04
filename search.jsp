@@ -22,9 +22,9 @@
 
 
 
-	SearchLayer search = new SearchLayer();
+	SearchLayer module = new SearchLayer();
 
-	out.println(search.Display());
+	out.println(module.Display());
 
      
         if(request.getParameter("updateIndex") != null)
@@ -61,7 +61,7 @@
           	out.println("Query is " + request.getParameter("query"));
           	out.println("<br>");
           
-		out.println(search.DescriptionSearch(request.getParameter("query")));
+		out.println(module.Search(request.getParameter("query")));
               
           }
 
