@@ -22,9 +22,9 @@
 
 
 
-	SearchLayer search = new SearchLayer();
+	SearchLayer module = new SearchLayer();
+	session = request.getSession();
 
-	out.println(search.Display());
 
      
         if(request.getParameter("updateIndex") != null)
@@ -44,6 +44,13 @@
       Query the database to see relevant items
       <table>
         <tr>
+	  <td>
+             <select name=order>
+  		<option value="order by aggregate_score desc">Rank</option>
+  		<option value="order by test_date desc">Date Descending</option>
+  		<option value="order by test_date asc">Date Ascending</option>
+	     </select> 
+          </td>
           <td>
             <input type=text name=query>
           </td>
@@ -61,7 +68,31 @@
           	out.println("Query is " + request.getParameter("query"));
           	out.println("<br>");
           
-		out.println(search.DescriptionSearch(request.getParameter("query")));
+
+		char privilege = (Character) session.getAttribute("privileges");
+		String ID = (String) session.getAttribute("person_id");
+
+		if (privilege == 'a')
+		{
+		out.println(module.SearchAll(request.getParameter("query"), request.getParameter("order")));
+		}
+
+		if (privilege == 'd')
+		{
+		out.println(module.SearchDoctor(request.getParameter("query"), request.getParameter("order"), ID));
+		}
+
+		if (privilege == 'p')
+		{
+		out.println(module.SearchPatient(request.getParameter("query"), request.getParameter("order"), ID));
+		}
+
+		if (privilege == 'r')
+		{
+		out.println(module.SearchRadiologist(request.getParameter("query"), request.getParameter("order"), ID));
+		}
+
+
               
           }
 

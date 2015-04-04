@@ -50,7 +50,7 @@ public class LoginLayer extends BaseLayer{
 	    {
 		truepwd = (rset.getString("password")).trim();
 		user_class = (rset.getString("class")).trim();
-		user_id = (rset.getString("person_id")).trim();
+		user_id = Integer.toString(rset.getInt("person_id")).trim();
 	    }
 
 
