@@ -24,6 +24,7 @@
 				i.e. String username = (String) session.getAttribute("user_name"); */
 				session.setAttribute("user_name", userName);
 				session.setAttribute("privileges", login.getPrivs());
+				session.setAttribute("person_id", login.getUserID());
 			}
 		}
 		catch (Exception ex){
