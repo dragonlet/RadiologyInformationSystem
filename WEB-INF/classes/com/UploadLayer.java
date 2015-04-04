@@ -10,6 +10,8 @@ import oracle.jdbc.*;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
 
 public class UploadLayer extends BaseLayer{
 	private final static String DOC_QUERY =	"select * from persons where person_id IN (select doctor_id from family_doctor)";
@@ -64,8 +66,8 @@ public class UploadLayer extends BaseLayer{
 		try{
 			InputStream instream = item.getInputStream();
 			BufferedImage full = ImageIO.read(instream);
-			BufferedImage reg = getSize(REG_SIZE);
-			BufferedImage thumb = getSize(THUMB_SIZE);
+			BufferedImage reg = getSize(full, REG_SIZE);
+			BufferedImage thumb = getSize(full, THUMB_SIZE);
 			
 			Statement stmt = getStmt();
 			
