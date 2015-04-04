@@ -54,11 +54,15 @@ else if(request.getParameter("record_id") != null)
 
 <% if(valid){ %>
 	Record :)
-	
 	<% if( _ul.hasImage(Integer.parseInt(request.getParameter("record_id"))) ){ %>
 		Image :)
-	<% } if(session.getAttribute("permissions") != null ) { %>
-		Upload
+	<% } if((Character) session.getAttribute("permissions") == 'r' ) { %>
+		<Form Action="view.jsp" Method="post" >
+			<input type="hidden" name="record_id" value="<%=request.getParameter("record_id")%>" >
+			<input type="hidden" name="img" value="true" >
+			<input type="file" name="pic" accept="image/*">
+			<input type="submit" value="Upload">
+		</Form>
 	<% } %>
 <% } else {%>
 	No record was submitted or the requested record failed to load...
