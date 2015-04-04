@@ -6,16 +6,16 @@ default: BaseLayer.class DataAnalysisModule.class BaseLayerException.class Perso
 BaseLayer.class: com/BaseLayer.java
 	$(JCC) $(JFLAGS) com/BaseLayer.java
 	
-DataAnalysisModule.class
+DataAnalysisModule.class: com/DataAnalysisModule.java
 	$(JCC) $(JFLAGS) com/DataAnalysisModule.java
 	
-BaseLayerException.class
+BaseLayerException.class: com/BaseLayerException.java
 	$(JCC) $(JFLAGS) com/BaseLayerException.java
 	
-Person.class
+Person.class: com/Person.java
 	$(JCC) $(JFLAGS) com/Person.java
 	
-UploadLayer.class
+UploadLayer.class: com/UploadLayer.java
 	$(JCC) $(JFLAGS) com/UploadLayer.java
 
 LoginLayer.class: com/LoginLayer.java
