@@ -199,7 +199,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 		try{
 			GetQueryResult(rank);
-			rset_rank = GetQueryResult("SELECT * FROM tempRank");
+			rset_rank = GetQueryResult("SELECT * FROM tempRank A LEFT JOIN pacs_images P ON A.record_id = P.record_id WHERE A.aggregate_score > 0");
 		}
 		catch(Exception ex)
 		{
@@ -354,7 +354,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 		try{
 			GetQueryResult(rank);
-			rset_rank = GetQueryResult("SELECT * FROM tempRank");
+			rset_rank = GetQueryResult("SELECT * FROM tempRank A LEFT JOIN pacs_images P ON A.record_id = P.record_id WHERE A.aggregate_score > 0");
 		}
 		catch(Exception ex)
 		{
@@ -508,7 +508,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 		try{
 			GetQueryResult(rank);
-			rset_rank = GetQueryResult("SELECT * FROM tempRank");
+			rset_rank = GetQueryResult("SELECT * FROM tempRank A LEFT JOIN pacs_images P ON A.record_id = P.record_id WHERE A.aggregate_score > 0");
 		}
 		catch(Exception ex)
 		{
@@ -660,7 +660,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 		try{
 			GetQueryResult(rank);
-			rset_rank = GetQueryResult("SELECT * FROM tempRank");
+			rset_rank = GetQueryResult("SELECT * FROM tempRank A LEFT JOIN pacs_images P ON A.record_id = P.record_id WHERE A.aggregate_score > 0");
 		}
 		catch(Exception ex)
 		{
