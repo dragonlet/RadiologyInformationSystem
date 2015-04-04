@@ -20,7 +20,7 @@
 		try {
 			if((goodLogin = login.validateLogin(userName, passwd)))
 			{
-				/* username must be cast to String, privileges to Character. 
+				/* username and user_id must be cast to String, privileges to Character. 
 				i.e. String username = (String) session.getAttribute("user_name"); */
 				session.setAttribute("user_name", userName);
 				session.setAttribute("privileges", login.getPrivs());
