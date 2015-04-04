@@ -35,12 +35,11 @@ public class DataAnalysisModule extends BaseLayer{
 
 	sent_sql = sql;
 
-
 	rset = GetQueryResult(sql);
 
 	while(rset != null && rset.next())
 	    {
-		count = Integer.parseInt((rset.getString("Img_Count")).trim());
+		count = Integer.parseInt((rset.getString("imgcount")).trim());
 
 		if(time_block.matches("month"))
 		    {
@@ -113,7 +112,7 @@ public class DataAnalysisModule extends BaseLayer{
 	    {
 	    case 1:
 		{
-		    sql = "SELECT to_number(to_char(R.test_date,'YYYY')) AS year1, "+time_spec+" AS "+time_period+", count(I.image_id) AS Img_Count FROM pacs_images I, radiology_record R WHERE I.record_id = R.record_id GROUP BY to_number(to_char(R.test_date,'YYYY')), "+time_spec;
+		    sql = "SELECT to_number(to_char(R.test_date,'YYYY')) AS year1, "+time_spec+" AS "+time_period+", count(I.image_id) AS imgcount FROM pacs_images I, radiology_record R WHERE I.record_id = R.record_id GROUP BY to_number(to_char(R.test_date,'YYYY')), "+time_spec;
 		    break;
 		}
 	    case 2:
