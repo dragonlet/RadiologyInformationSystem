@@ -25,7 +25,6 @@
 	SearchLayer module = new SearchLayer();
 	session = request.getSession();
 
-	out.println(module.Display());
 
      
         if(request.getParameter("updateIndex") != null)
@@ -45,6 +44,13 @@
       Query the database to see relevant items
       <table>
         <tr>
+	  <td>
+             <select name=order>
+  		<option value="order by aggregate_score desc">Rank</option>
+  		<option value="order by test_date desc">Date Descending</option>
+  		<option value="order by test_date asc">Date Ascending</option>
+	     </select> 
+          </td>
           <td>
             <input type=text name=query>
           </td>
@@ -67,23 +73,23 @@
 		String ID = (String) session.getAttribute("person_id");
 
 		if (privilege == 'a')
-		{%><P>admin</P><%
-		out.println(module.SearchAll(request.getParameter("query")));
+		{
+		out.println(module.SearchAll(request.getParameter("query"), request.getParameter("order")));
 		}
 
 		if (privilege == 'd')
-		{%><P>doctor</P><%
-		out.println(module.SearchDoctor(request.getParameter("query"), ID));
+		{
+		out.println(module.SearchDoctor(request.getParameter("query"), "order by aggregate_score desc", ID));
 		}
 
 		if (privilege == 'p')
-		{%><P>patient</P><%
-		out.println(module.SearchPatient(request.getParameter("query"), ID));
+		{
+		out.println(module.SearchPatient(request.getParameter("query"), "order by aggregate_score desc", ID));
 		}
 
 		if (privilege == 'r')
-		{%><P>radiologist</P><%
-		out.println(module.SearchRadiologist(request.getParameter("query"), ID));
+		{
+		out.println(module.SearchRadiologist(request.getParameter("query"), "order by aggregate_score desc", ID));
 		}
 
 
