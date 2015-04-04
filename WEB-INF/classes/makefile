@@ -1,7 +1,7 @@
 JCC = javac
 JFLAGS = -g
 
-default: BaseLayer.class LoginLayer.class ManagementModule.class MyAccountLayer.class RISBusinessLayer.class ReportModule.class UniqueID.class
+default: BaseLayer.class LoginLayer.class ManagementModule.class MyAccountLayer.class RISBusinessLayer.class ReportModule.class UniqueID.class SearchLayer.class OlapShelf.class
 
 BaseLayer.class: com/BaseLayer.java
 	$(JCC) $(JFLAGS) com/BaseLayer.java
@@ -23,7 +23,12 @@ ReportModule.class: com/ReportModule.java
 
 UniqueID.class: com/UniqueID.java
 	$(JCC) $(JFLAGS) com/UniqueID.java
+	
+SearchLayer.class: com/SearchLayer.java
+	$(JCC) $(JFLAGS) com/SearchLayer.java
 
+OlapShelf.class: com/OlapShelf.java
+	$(JCC) $(JFLAGS) com/OlapShelf.java
 
 
 clean: 

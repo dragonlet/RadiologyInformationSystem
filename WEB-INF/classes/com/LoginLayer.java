@@ -7,6 +7,7 @@ public class LoginLayer extends BaseLayer{
     private Character user_privilege_level;
     private boolean logged_in;
     private boolean failure;
+	private String user_id = "none";
 
     public LoginLayer()
     {		
@@ -19,6 +20,11 @@ public class LoginLayer extends BaseLayer{
     {
 	return user_privilege_level;
     }
+
+	public String getUserID()
+	{
+		return user_id;
+	}
     
     public boolean isLoggedIn()
     {
@@ -44,6 +50,7 @@ public class LoginLayer extends BaseLayer{
 	    {
 		truepwd = (rset.getString("password")).trim();
 		user_class = (rset.getString("class")).trim();
+		user_id = (rset.getString("person_id")).trim();
 	    }
 
 
@@ -67,6 +74,6 @@ public class LoginLayer extends BaseLayer{
 	
     private String genValidateUserSql(String username)
     {
-		return "select password, class from users where user_name =" + "'" + username + "'";
+		return "select password, class, person_id from users where user_name =" + "'" + username + "'";
     }
 }
