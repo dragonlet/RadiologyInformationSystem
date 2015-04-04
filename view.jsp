@@ -32,21 +32,7 @@ if(request.getParameter("new") != null)
 }
 else if(request.getParameter("record_id") != null)
 {
-	if(request.getParameter("img") != null){
-		Integer img_id = _uid.generate("record")
-		
-		DiskFileUpload fu = new DiskFileUpload();
-	    List FileItems = fu.parseRequest(request);
-	    // Process the uploaded items, assuming only 1 image file uploaded
-	    Iterator i = FileItems.iterator();
-	    FileItem item = (FileItem) i.next();
-	    while (i.hasNext() && item.isFormField()) {
-		    item = (FileItem) i.next();
-	    }
-		
-		_ul.addImg( img_id, Integer.parseInt(request.getParameter("record_id")), item);
-	}
-	
+
 	//ToDo: Get the record to be displayed
 	valid = true;
 }
@@ -54,16 +40,6 @@ else if(request.getParameter("record_id") != null)
 
 <% if(valid){ %>
 	Record :)
-	<% if( _ul.hasImage(Integer.parseInt(request.getParameter("record_id"))) ){ %>
-		Image :)
-	<% } if((Character) session.getAttribute("permissions") == 'r' ) { %>
-		<Form Action="view.jsp" Method="post" >
-			<input type="hidden" name="record_id" value="<%=request.getParameter("record_id")%>" >
-			<input type="hidden" name="img" value="true" >
-			<input type="file" name="pic" accept="image/*">
-			<input type="submit" value="Upload">
-		</Form>
-	<% } %>
 <% } else {%>
 	No record was submitted or the requested record failed to load...
 <% } %>
