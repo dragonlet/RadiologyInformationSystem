@@ -1,6 +1,8 @@
 package com;
 import java.lang.*;
 import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.sql.*;
 import java.util.*;
 import oracle.sql.*;
@@ -13,8 +15,8 @@ public class UploadLayer extends BaseLayer{
 	private final static String DOC_QUERY =	"select * from persons where person_id IN (select doctor_id from family_doctor)";
 	private final static String PAT_QUERY = "select * from persons";
 	private final static String NEW_RECORD = "INSERT into radiology_record VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private final static Integer THUMB_SIZE = 75;
-	private final static Integer REG_SIZE = 500;
+	private final static int THUMB_SIZE = 75;
+	private final static int REG_SIZE = 500;
 	
 	public UploadLayer() {}
 	
@@ -104,7 +106,7 @@ public class UploadLayer extends BaseLayer{
 		ResultSet rset = null;
 		Boolean valid = false;
 		
-		rset = GetQueryResult(SELECT * FROM pacs_images WHERE record_id = "+image_id);
+		rset = GetQueryResult("SELECT * FROM pacs_images WHERE record_id = "+record_id);
 		valid = (rset != null) ? true : false;
 		
 		closeConnection();
@@ -164,7 +166,7 @@ public class UploadLayer extends BaseLayer{
 		if(size > max)
 			return img;
 			
-		return shrink(img, maz/size);
+		return shrink(img, max/size);
 	}
 	
 }
