@@ -79,17 +79,17 @@
 
 		if (privilege == 'd')
 		{
-		out.println(module.SearchDoctor(request.getParameter("query"), "order by aggregate_score desc", ID));
+		out.println(module.SearchDoctor(request.getParameter("query"), request.getParameter("order"), ID));
 		}
 
 		if (privilege == 'p')
 		{
-		out.println(module.SearchPatient(request.getParameter("query"), "order by aggregate_score desc", ID));
+		out.println(module.SearchPatient(request.getParameter("query"), request.getParameter("order"), ID));
 		}
 
 		if (privilege == 'r')
 		{
-		out.println(module.SearchRadiologist(request.getParameter("query"), "order by aggregate_score desc", ID));
+		out.println(module.SearchRadiologist(request.getParameter("query"), request.getParameter("order"), ID));
 		}
 
 
