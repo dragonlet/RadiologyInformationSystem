@@ -181,6 +181,15 @@
 <%
 	} else if(result_loaded && shelvedRows.size() == 0){
 %>
+<br>
+
+<TABLE class="resTABLE" >
+	<TR><TD class = resTD >Patient ID: <% out.println(patient_id); %></TD>
+	<TD class = resTD >Test Type: <% out.println(test_type); %></TD></TR>
+</TABLE>
+
+<br>
+
 <TABLE class="resTABLE" >
 	<TR><TD class = resTD >There were no images found matching the criteria specified.</TD></TR>
 </TABLE>
