@@ -10,8 +10,8 @@ import oracle.jdbc.*;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import org.apache.commons.fileupload.DiskFileUpload;
-import org.apache.commons.fileupload.FileItem;
+//import org.apache.commons.fileupload.DiskFileUpload;
+//import org.apache.commons.fileupload.FileItem;
 
 public class UploadLayer extends BaseLayer{
 	private final static String DOC_QUERY =	"select * from persons where person_id IN (select doctor_id from family_doctor)";
@@ -57,7 +57,7 @@ public class UploadLayer extends BaseLayer{
 		
 		closeConnection();
 	}
-	
+	/*
 	public void addImg(Integer image_id, Integer record_id, FileItem item)
 	throws BaseLayerException
 	{
@@ -113,7 +113,7 @@ public class UploadLayer extends BaseLayer{
 		
 		closeConnection();
 	}
-	
+	*/
 	public ArrayList<Person> getDoctors()
 	throws BaseLayerException
 	{
@@ -145,7 +145,7 @@ public class UploadLayer extends BaseLayer{
 		closeConnection();
 		return ret;
 	}
-	
+	/*
 	private static BufferedImage shrink(BufferedImage image, int n)
 	{
 		int w = image.getWidth() / n;
@@ -170,5 +170,5 @@ public class UploadLayer extends BaseLayer{
 			
 		return shrink(img, max/size);
 	}
-	
+	*/
 }
