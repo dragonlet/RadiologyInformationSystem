@@ -13,13 +13,11 @@ boolean valid = false;
 
 if(request.getParameter("new") != null)
 {
-	Integer id = null;
-	
-	id = _uid.generate("record");
+	Integer rec_id = _uid.generate("record");
 
 	SimpleDateFormat _sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	_ul.addRecord(id,
+	_ul.addRecord(rec_id,
 		Integer.parseInt(request.getParameter("doctor_id")),
 		Integer.parseInt(request.getParameter("patient_id")),
 		Integer.parseInt(request.getParameter("radiologist_id")),
@@ -35,18 +33,18 @@ if(request.getParameter("new") != null)
 else if(request.getParameter("record_id") != null)
 {
 	if(request.getParameter("img") != null){
+		Integer img_id = _uid.generate("record")
 		
 		DiskFileUpload fu = new DiskFileUpload();
 	    List FileItems = fu.parseRequest(request);
-	    
 	    // Process the uploaded items, assuming only 1 image file uploaded
 	    Iterator i = FileItems.iterator();
 	    FileItem item = (FileItem) i.next();
 	    while (i.hasNext() && item.isFormField()) {
 		    item = (FileItem) i.next();
 	    }
-
-		_ul.addImg(Integer.parseInt(request.getParameter("record_id")), item);
+		
+		_ul.addImg( img_id, Integer.parseInt(request.getParameter("record_id")), item);
 	}
 	
 	//ToDo: Get the record to be displayed
@@ -57,9 +55,11 @@ else if(request.getParameter("record_id") != null)
 <% if(valid){ %>
 	Record :)
 	
-	<% if(_ul.hasImage())){ %>
-	
-	<% } if(session.getAttribute("permissions") != null ) {}%>
+	<% if( _ul.hasImage(Integer.parseInt(request.getParameter("record_id"))) ){ %>
+		Image :)
+	<% } if(session.getAttribute("permissions") != null ) { %>
+		Upload
+	<% } %>
 <% } else {%>
 	No record was submitted or the requested record failed to load...
 <% } %>

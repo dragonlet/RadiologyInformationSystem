@@ -76,13 +76,12 @@ public class BaseLayer{
 	    }
     }
 	
-	public boolean execute(String sql)
+	public Statement getStmt()
 	throws BaseLayerException
     {
 	try
 	    {
-		Statement stmt = conn.createStatement();
-		return  stmt.execute(sql);
+		return conn.createStatement();
 	    }
 	catch(Exception ex)
 	    {
