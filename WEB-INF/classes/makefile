@@ -1,10 +1,22 @@
 JCC = javac
 JFLAGS = -g
 
-default: BaseLayer.class LoginLayer.class ManagementModule.class MyAccountLayer.class RISBusinessLayer.class ReportModule.class UniqueID.class SearchLayer.class OlapShelf.class
+default: BaseLayer.class DataAnalysisModule.class BaseLayerException.class Person.class UploadLayer.class LoginLayer.class ManagementModule.class MyAccountLayer.class RISBusinessLayer.class ReportModule.class UniqueID.class SearchLayer.class OlapShelf.class
 
 BaseLayer.class: com/BaseLayer.java
 	$(JCC) $(JFLAGS) com/BaseLayer.java
+	
+DataAnalysisModule.class
+	$(JCC) $(JFLAGS) com/DataAnalysisModule.java
+	
+BaseLayerException.class
+	$(JCC) $(JFLAGS) com/BaseLayerException.java
+	
+Person.class
+	$(JCC) $(JFLAGS) com/Person.java
+	
+UploadLayer.class
+	$(JCC) $(JFLAGS) com/UploadLayer.java
 
 LoginLayer.class: com/LoginLayer.java
 	$(JCC) $(JFLAGS) com/LoginLayer.java
