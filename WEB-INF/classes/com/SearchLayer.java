@@ -293,7 +293,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchPatient(String query, int ID){
+	public String SearchPatient(String query, String ID){
 
 
 
@@ -447,7 +447,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchDoctor(String query, int ID){
+	public String SearchDoctor(String query, String ID){
 
 
 
@@ -599,7 +599,7 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 
-	public String SearchRadiologist(String query, int ID){
+	public String SearchRadiologist(String query, String ID){
 
 
 
@@ -752,7 +752,6 @@ String rank = "CREATE OR REPLACE VIEW tempRank AS SELECT DE.record_id, DE.score 
 
 
 }
-
 
 
 
